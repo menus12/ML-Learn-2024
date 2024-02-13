@@ -23,9 +23,11 @@ def get_length(filename):
 
 parser = argparse.ArgumentParser(description='Learn materials duration calculator')    
 parser.add_argument('--file', type=str, help='Materials dump from database')
-parser.add_argument('--save_as', type=str, help='New filename')
+parser.add_argument('--update', type=bool, help='Update metadata (default is False)')
 args = parser.parse_args()
 
+if args.update == None:
+    args.update = False
 
 if args.file == None:
     print (parser.print_help())
@@ -99,6 +101,11 @@ for material in source_file:
     material['words'] = len(c_text.split())
     print (' |-- material has ' + str(material['words']) + ' words.')
 
+if args.update: 
+    new_metadata = json.dumps(source_file, indent = 4, ensure_ascii=False)
+    with open(args.file, 'w') as file:
+        file.write(new_metadata)
+    print ('Metadata has been updated')
 
 print ('---')
 end_time = datetime.datetime.now()
