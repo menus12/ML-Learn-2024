@@ -6,7 +6,7 @@ import re
 import argparse
 from pytube import YouTube
 
-parser = argparse.ArgumentParser(description='Learn materials duration calculator')    
+parser = argparse.ArgumentParser(description='Learn materials metadata extender')    
 parser.add_argument('--file', type=str, help='Materials dump from database')
 parser.add_argument('--update', type=bool, help='Update metadata (default is False)')
 args = parser.parse_args()
