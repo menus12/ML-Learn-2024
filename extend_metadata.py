@@ -2,24 +2,9 @@
 
 import os
 import json
-import subprocess
-import textract
 import re
-import ru
-import isodate
-import datetime
 import argparse
 from pytube import YouTube
-from bs4 import BeautifulSoup
-from markdown import markdown
-
-def get_length(filename):
-    result = subprocess.run(["ffprobe", "-v", "error", "-show_entries",
-                             "format=duration", "-of",
-                             "default=noprint_wrappers=1:nokey=1", filename],
-        stdout=subprocess.PIPE,
-        stderr=subprocess.STDOUT)
-    return float(result.stdout)
 
 parser = argparse.ArgumentParser(description='Learn materials duration calculator')    
 parser.add_argument('--file', type=str, help='Materials dump from database')
