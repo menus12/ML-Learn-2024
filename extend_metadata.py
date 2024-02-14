@@ -73,12 +73,13 @@ for material in source_file:
     print (' |-- material has ' + str(material['ext_links']) + ' links.')
     c_text = re.sub('\[.*?\]\(http.*?\)'," ", c_text)                         # remove external links from text
         
-    c_text = re.sub('\(.*\.pka\)'," ", c_text)                              # remove pka assets from text
+    c_text = re.sub('\[.*?\]\(.*?\.pka\)'," ", c_text)                              # remove pka assets from text
 
-    pics = re.findall('\[.*\]\(.*(\.svg|\.gif|\.png|\.jpg|\.jpeg)\)', c_text)   # count pictures
+    p = re.search('\[.*?\]\(.*?(\.svg|\.gif|\.png|\.jpg|\.jpeg)\)', c_text)
+    pics = re.findall('\[.*?\]\(.*?(\.svg|\.gif|\.png|\.jpg|\.jpeg)\)', c_text)   # count pictures
     material['pics'] = len(pics)
     print (' |-- material has ' + str(material['pics']) + ' pics.')
-    c_text = re.sub('\[.*\]\(.*(\.svg|\.gif|\.png|\.jpg|\.jpeg)\)'," ", c_text) # remove external links from text
+    c_text = re.sub('\[.*?\]\(.*?(\.svg|\.gif|\.png|\.jpg|\.jpeg)\)'," ", c_text) # remove external links from text
 
     c_text = re.sub('[^а-яА-Яa-zA-Z0-9 -]'," ", c_text)                     # remove all non-alpha-numeric
     c_text = re.sub('\s{2,}'," ", c_text)                                   # trim double whitespaces
