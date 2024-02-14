@@ -1,6 +1,6 @@
 ## Title
 <!-- Optional, the preface is not about the subject -->
-Prediction of learning materials study time
+An analysis of predicted study time in an inclusive digital environment for advanced training in the field of modern information technology
 
 By  Aleksandr Gorbachev & David Langeveld  
 
@@ -29,6 +29,41 @@ As the project develops, it would be interesting to view the relations between u
 
 ## Operationalization of the research questions
 <!-- Describe the data that will be used and how the questions will be answered on the basis of this data. The data analysis itself is not yet described here. So do tell ‘Data file [X] comes from [Y] and can answer the posed questions because [Z]’, but do not yet describe the data itself -->
+
+The dataset delivered by the client is composed of the following elements and will be viewed in R. The original file is in JSON format, which is a standard text-based format for representing structured data based on JavaScript object syntax. It is commonly used for transmitting data in web applications.
+Converting the raw JSONs to CSV is done via Python scripts. 
+
+The following 4 tables will be used:
+
+Development environment:
+- dev_materials
+- dev_user_materials
+
+Production environment:
+- prod_materials
+- prod_user_materials
+
+**Table: dev_materials & prod_materials:**
+Name of Column     | Description
+-------------   | -------------
+materialType    | Type of content, such as: lecture, lab, test
+video_minutes	  | Duration of the material, for example 20.0
+ext_links       | Code that relates to
+pics	          | Boolean code (1.0 or 0.0) that mentions if pictures are in the content
+words           | Number of words
+_id.$oid        | ID of the content
+
+**Table: dev_user_materials & prod_user_materials:**
+Name of Column     |   Description
+-------------   |   -------------
+completed       |   Boolean code (True or False) that mentions if the content has been completed by the user
+_id.$oid	      |   ID of the content
+material_id.$oid|   Code that relates to Material ID
+user_id.$oid    |   Code that relates to User ID
+assignedAt.$date|   Datetime format when user has been assigned (started?)
+score           |   Score of content by user when completed
+submitedAt.$date|   Datetime format when user has submitted the material
+
 
 ### Dataset analysis
 <!-- Dataset is fully cleansed, visualized and analysed-->
