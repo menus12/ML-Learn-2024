@@ -31,7 +31,7 @@ As the project develops, it would be interesting to view the relations between u
 <!-- Describe the data that will be used and how the questions will be answered on the basis of this data. The data analysis itself is not yet described here. So do tell ‘Data file [X] comes from [Y] and can answer the posed questions because [Z]’, but do not yet describe the data itself -->
 
 The dataset delivered by the client is composed of the following elements and will be viewed in R. The original file is in JSON format, which is a standard text-based format for representing structured data based on JavaScript object syntax. It is commonly used for transmitting data in web applications.
-Converting the raw JSONs to CSV is done via Python scripts (seen Appendix). 
+Converting the raw JSONs to CSV is done via Python scripts (see Appendix). 
 
 The following 4 tables will be used:
 
