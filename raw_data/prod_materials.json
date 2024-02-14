@@ -67,8 +67,8 @@
         },
         "video_minutes": 0,
         "ext_links": 0,
-        "pics": 1,
-        "words": 222
+        "pics": 3,
+        "words": 475
     },
     {
         "_id": {
@@ -121,8 +121,8 @@
         "sourceUrl": "https://github.com/nsalab-tmn/learn-az-900/blob/01-cloud-concepts/01.02-fundamental-azure-concepts/learn-metadata.json?ref=learn-upload",
         "video_minutes": 0,
         "ext_links": 0,
-        "pics": 1,
-        "words": 149
+        "pics": 11,
+        "words": 2079
     },
     {
         "_id": {
@@ -439,8 +439,8 @@
         "sourceUrl": "https://github.com/nsalab-tmn/learn-az-900/blob/02-core-azure-services/02.01-core-azure-architectural-components/learn-metadata.json?ref=learn-upload",
         "video_minutes": 0,
         "ext_links": 1,
-        "pics": 1,
-        "words": 483
+        "pics": 6,
+        "words": 1875
     },
     {
         "_id": {
@@ -677,8 +677,8 @@
         },
         "video_minutes": 0,
         "ext_links": 0,
-        "pics": 1,
-        "words": 370
+        "pics": 7,
+        "words": 742
     },
     {
         "_id": {
@@ -764,8 +764,8 @@
         },
         "video_minutes": 0,
         "ext_links": 1,
-        "pics": 1,
-        "words": 332
+        "pics": 2,
+        "words": 352
     },
     {
         "_id": {
@@ -851,8 +851,8 @@
         },
         "video_minutes": 0,
         "ext_links": 1,
-        "pics": 1,
-        "words": 314
+        "pics": 2,
+        "words": 330
     },
     {
         "_id": {
@@ -1002,8 +1002,8 @@
         "sourceUrl": "https://github.com/nsalab-tmn/learn-az-900/blob/02-core-azure-services/02.08-azure-networking-services/learn-metadata.json?ref=learn-upload",
         "video_minutes": 0,
         "ext_links": 0,
-        "pics": 1,
-        "words": 934
+        "pics": 10,
+        "words": 3464
     },
     {
         "_id": {
@@ -1318,8 +1318,8 @@
         "sourceUrl": "https://github.com/nsalab-tmn/learn-az-900/blob/02-core-azure-services/02.11-azure-storage-services/learn-metadata.json?ref=learn-upload",
         "video_minutes": 0,
         "ext_links": 0,
-        "pics": 1,
-        "words": 38
+        "pics": 7,
+        "words": 1171
     },
     {
         "_id": {
@@ -1445,8 +1445,8 @@
         "sourceUrl": "https://github.com/nsalab-tmn/learn-az-900/blob/02-core-azure-services/02.14-azure-database-services/learn-metadata.json?ref=learn-upload",
         "video_minutes": 0,
         "ext_links": 0,
-        "pics": 1,
-        "words": 811
+        "pics": 2,
+        "words": 1697
     },
     {
         "_id": {
@@ -1539,8 +1539,8 @@
         },
         "video_minutes": 0,
         "ext_links": 1,
-        "pics": 1,
-        "words": 137
+        "pics": 9,
+        "words": 497
     },
     {
         "_id": {
@@ -1773,8 +1773,8 @@
         },
         "video_minutes": 0,
         "ext_links": 1,
-        "pics": 1,
-        "words": 271
+        "pics": 6,
+        "words": 554
     },
     {
         "_id": {
@@ -2185,8 +2185,8 @@
         },
         "video_minutes": 0,
         "ext_links": 1,
-        "pics": 1,
-        "words": 209
+        "pics": 8,
+        "words": 449
     },
     {
         "_id": {
@@ -2534,8 +2534,8 @@
         },
         "video_minutes": 0,
         "ext_links": 1,
-        "pics": 1,
-        "words": 211
+        "pics": 4,
+        "words": 418
     },
     {
         "_id": {
@@ -2620,8 +2620,8 @@
         },
         "video_minutes": 0,
         "ext_links": 1,
-        "pics": 1,
-        "words": 133
+        "pics": 4,
+        "words": 560
     },
     {
         "_id": {
@@ -2706,8 +2706,8 @@
         },
         "video_minutes": 0,
         "ext_links": 1,
-        "pics": 1,
-        "words": 128
+        "pics": 5,
+        "words": 617
     },
     {
         "_id": {
@@ -3664,8 +3664,8 @@
         "sourceUrl": "https://github.com/nsalab-tmn/learn-az-900/blob/05-identity-governance-privacy-and-compliance-features/05.01-core-azure-identity-services/learn-metadata.json?ref=learn-upload",
         "video_minutes": 0,
         "ext_links": 1,
-        "pics": 1,
-        "words": 354
+        "pics": 3,
+        "words": 1507
     },
     {
         "_id": {
@@ -3858,8 +3858,8 @@
         },
         "video_minutes": 0,
         "ext_links": 1,
-        "pics": 1,
-        "words": 112
+        "pics": 3,
+        "words": 277
     },
     {
         "_id": {
@@ -3901,8 +3901,8 @@
         },
         "video_minutes": 0,
         "ext_links": 1,
-        "pics": 1,
-        "words": 148
+        "pics": 4,
+        "words": 472
     },
     {
         "_id": {
