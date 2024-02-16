@@ -26,7 +26,6 @@ The client decided to develop this training area and began to study the market f
 
 As the project develops, it would be interesting to view the relations between users and their attributes when making use of the platform. This is where our research begins.
 
-
 ## Operationalization of the research objectives
 <!-- Describe the data that will be used and how the questions will be answered on the basis of this data. The data analysis itself is not yet described here. So do tell ‘Data file [X] comes from [Y] and can answer the posed questions because [Z]’, but do not yet describe the data itself -->
 
@@ -54,45 +53,58 @@ The following steps will make sure to operationalize the data so that the formul
 - Exploratory data visualization 
 - Application of multiple regression methods
 
+## JSON pre-processing
 
-### Dataset analysis
-<!-- Dataset is fully cleansed, visualized and analysed-->
+Data pre-processing aims to enhance the existing dump of the materials collection with additional metadata (features) extracted from the text and to convert relevant information into tabular CSV data.
 
-The dataset delivered by the client is composed of the following elements and will be viewed in R. The original file is in JSON format, which is a standard text-based format for representing structured data based on JavaScript object syntax. It is commonly used for transmitting data in web applications.
-Converting the raw JSONs to CSV is done via Python scripts (see Appendix). 
+For simplicity, the pre-processing is done using the following scripts written in Python and attached to the report:
+- extend_metadata.py
+- json_to_csv.py
 
-The following 4 tables will be used:
+### Extension of metadata
 
-Development environment:
-- dev_materials
-- dev_user_materials
+A typical study material of each type is essentially a text, which may be supported by videos or illustrations. So we want to extract the total duration of videos, the number of images and count the number of words for each material. As the source text is in Markdown format and all assets are embedded in the source text, we also need to remove all links to previously counted assets and non-alpha-numeric characters to make the word count more accurate.
 
-Production environment:
-- prod_materials
-- prod_user_materials
+### Convertion to tabular data
 
-**Table: dev_materials & prod_materials:**
-Name of Column     | Description
+Since raw JSON data contains many data (e.g. material sources, deployment logs, etc.) which is not relevant for further analysis the purpose of the convertion script is to whitelist only relevant features for both types of files and save these collections as CSV files
+
+- Source files for development and production environments:
+  - dev_materials.json
+  - dev_user_materials.json
+  - prod_materials.json
+  - prod_user_materials.json
+
+- Result files used for analysis:
+  - dev_materials.csv
+  - dev_user_materials.csv
+  - prod_materials.csv
+  - prod_user_materials.csv
+
+Below the description of pre-processed data sets:
+
+**Table 1: Structure of dev_materialscsv & prod_materials.csv**
+Name of Column  | Description
 -------------   | -------------
+_id.$oid        | Material ID
 materialType    | Type of content, such as: lecture, lab, test
-video_minutes	  | Duration of the material, for example 20.0
-ext_links       | Code that relates to
-pics	          | Boolean code (1.0 or 0.0) that mentions if pictures are in the content
+video_minutes	| Duration of the embedded videos (if any)
+pics	        | Number of illustrations
 words           | Number of words
-_id.$oid        | ID of the content
 
-**Table: dev_user_materials & prod_user_materials:**
+
+**Table 2: Structure of dev_user_materials & prod_user_materials**
 Name of Column     |   Description
 -------------   |   -------------
-completed       |   Boolean code (True or False) that mentions if the content has been completed by the user
-_id.$oid	      |   ID of the content
-material_id.$oid|   Code that relates to Material ID
-user_id.$oid    |   Code that relates to User ID
-assignedAt.$date|   Datetime format when user has been assigned (started?)
-score           |   Score of content by user when completed
-submitedAt.$date|   Datetime format when user has submitted the material
+_id.$oid	    |   User-material association ID
+user_id.$oid    |   User ID
+material_id.$oid|   Material ID
+assignedAt.$date|   Timestamp when material was assigned to a user
+submitedAt.$date|   Timestamp when material was submitted by a user
+score           |   User score of lab or text (if any)
 
-
+## Dataset analysis
+<!-- Dataset is fully cleansed, visualized and analysed-->
 
 ### Machine learning models
 <!-- More than three models applied and finetuned. If you choose for Regression, Association of Clustering, only one model is available. But you need that one apply a model with some set of parameters-->
