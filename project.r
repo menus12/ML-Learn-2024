@@ -14,7 +14,7 @@ library(infer)
 library(plotly)
 options(scipen = 999)
 
-# #################### Loading and clearing dev data
+# #################### Loading dev data
 
 # Loading csv files 
 dev_materials <- read.csv('Datafiles/dev_materials.csv')
@@ -38,7 +38,7 @@ dev_user_materials$submitted_at <- as.POSIXct(dev_user_materials$submitted_at,
                                               format="%Y-%m-%dT%H:%M:%S")
 
 
-# #################### Loading and clearing prod data
+# #################### Loading prod data
 
 # Loading csv files 
 prod_materials <- read.csv('Datafiles/prod_materials.csv')
@@ -62,26 +62,28 @@ prod_user_materials$submitted_at <- as.POSIXct(prod_user_materials$submitted_at,
                                                format="%Y-%m-%dT%H:%M:%S")
 
 
-################################ Combine dev and prod
+# #################### Combining dev and prod 
 
 combined_materials <- rbind(dev_materials, prod_materials)
 combined_user_materials <- rbind(dev_user_materials, prod_user_materials)
+
+# #################### Cleaning user-materials associations
 
 # Filtering only completed materials
 com_filtered <- combined_user_materials %>% 
   filter(!is.na(assigned_at) & !is.na(submitted_at))
 
-# Creating new column with time difference in minutes
+# Creating new column with time difference in minutes (duration)
 com_filtered$time_diff <- round(as.double(com_filtered$submitted_at - 
-                                            com_filtered$assigned_at) / 60, 
-                                digits = 2)
+                              com_filtered$assigned_at) / 60, digits = 2)
 
 # Joining materials metadata
 com_filtered <- left_join(com_filtered, combined_materials, by = "material_id") 
 
 # Exploring unique and missing data for combined dataframe
-data.frame(unique=sapply(com_filtered, function(x) sum(length(unique(x, na.rm = TRUE)))), 
-           missing=sapply(com_filtered, function(x) sum(is.na(x) | x == 0)))
+data.frame(unique=sapply(com_filtered, 
+            function(x) sum(length(unique(x, na.rm = TRUE)))), 
+            missing=sapply(com_filtered, function(x) sum(is.na(x) | x == 0)))
 
 # Clearing rows with no text (words)
 com_filtered <- com_filtered %>% drop_na("words")
@@ -99,16 +101,29 @@ lectures <- com_filtered %>% filter(materialType == "lecture")
 labs <- com_filtered %>% filter(materialType == "lab")
 tests <- com_filtered %>% filter(materialType == "test")
 
+# #################### Cleaning lectures
+
 # Removing extreme outliers for lectures
 Q <- quantile(lectures$time_diff, probs=c(.25, .75), na.rm = FALSE)
 iqr <- IQR(lectures$time_diff)
 lectures <- subset(lectures, lectures$time_diff > (Q[1] - 1.5*iqr) & 
                      lectures$time_diff < (Q[2]+1.5*iqr))
 
+# Removing observations where completion time < 1 min
+lectures <- lectures %>% filter(time_diff > 1)
+
+# Removing observations of skipped lectures with videos
+lectures <- lectures %>% filter(video_minutes < time_diff)
+
 # Check spread in completion time after removing outliers
 boxplot(lectures$time_diff,
         xlab = "Lectures",
         ylab = "Completion time (mins)")
+
+# Skimming completion time
+lectures$time_diff %>% skim()
+
+# #################### Cleaning labs
 
 # Removing extreme outliers for labs
 Q <- quantile(labs$time_diff, probs=c(.25, .75), na.rm = FALSE)
@@ -116,10 +131,21 @@ iqr <- IQR(labs$time_diff)
 labs <- subset(labs, labs$time_diff > (Q[1] - 1.5*iqr) & 
                  labs$time_diff < (Q[2]+1.5*iqr))
 
+# Removing observations where completion time < 5 min
+labs <- labs %>% filter(time_diff > 5)
+
+# Removing incomplete labs
+labs <- labs %>% filter(!is.na(score) & score != 0)
+
 # Check spread in completion time after removing outliers
 boxplot(labs$time_diff,
-        xlab = "Lectures",
+        xlab = "Labs",
         ylab = "Completion time (mins)")
+
+# Skimming completion time
+labs$time_diff %>% skim()
+
+# #################### Cleaning tests
 
 # Removing extreme outliers for tests
 Q <- quantile(tests$time_diff, probs=c(.25, .75), na.rm = FALSE)
@@ -127,18 +153,18 @@ iqr <- IQR(tests$time_diff)
 tests <- subset(tests, tests$time_diff > (Q[1] - 1.5*iqr) & 
                   tests$time_diff < (Q[2]+1.5*iqr))
 
+# Removing incomplete tests
+tests <- tests %>% filter(!is.na(score))
+
 # Check spread in completion time after removing outliers
-boxplot(labs$time_diff,
-        xlab = "Lectures",
+boxplot(tests$time_diff,
+        xlab = "Tests",
         ylab = "Completion time (mins)")
 
+# Skimming completion time
+tests$time_diff %>% skim()
+
 ################################ Analyzing completion time for lectures
-
-# Removing observations where completion time < 1 min
-lectures <- lectures %>% filter(time_diff > 1)
-
-# Removing observations of skipped lectures with videos
-lectures <- lectures %>% filter(video_minutes < time_diff)
 
 # Visualizing linear model (time vs words)
 ggplot(lectures, aes(x = words, y = time_diff)) +
@@ -180,12 +206,6 @@ plot_ly(lectures, x = ~words, y = ~pics, z = ~video_minutes,
 
 ################################ Analyzing completion time for labs
 
-# Removing observations where completion time < 5 min
-labs <- labs %>% filter(time_diff > 5)
-
-# Removing incomplete labs
-labs <- labs %>% filter(!is.na(score) & score != 0)
-
 # Visualizing linear model (time vs words)
 ggplot(labs, aes(x = words, y = time_diff)) +
   geom_jitter(alpha = 0.5) +
@@ -226,10 +246,6 @@ plot_ly(labs, x = ~words, y = ~pics, z = ~score,
 
 
 ################################ Analyzing completion time for tests
-
-# Removing incomplete tests
-tests <- tests %>% filter(!is.na(score))
-
 
 # Visualizing linear model (time vs words)
 ggplot(tests, aes(x = words, y = time_diff)) +
