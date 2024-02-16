@@ -33,7 +33,7 @@ f.close()                               # Closing file
 # White list of JSON objects to convert to CSV columns
 white_list = ["_id", "materialType", 
               "video_minutes", "pics", "words", 
-              "completed", "material_id", "user_id", "assignedAt", 
+              "material_id", "user_id", "assignedAt", 
               "submitedAt", "score"]
 
 # Iterating over list of JSON objects and removing objects which are not whitelisted
