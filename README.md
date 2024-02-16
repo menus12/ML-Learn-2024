@@ -67,24 +67,19 @@ A typical study material of each type is essentially a text, which may be suppor
 
 ### Convertion to tabular data
 
-Since raw JSON data contains many data (e.g. material sources, deployment logs, etc.) which is not relevant for further analysis the purpose of the convertion script is to whitelist only relevant features for both types of files and save these collections as CSV files
+Since raw JSON data contains many data (e.g. material sources, deployment logs, etc.) which is not relevant for further analysis the purpose of the convertion script is to whitelist only relevant features for both types of files and save these collections as CSV files.
 
-- Source files for development and production environments:
-  - dev_materials.json
-  - dev_user_materials.json
-  - prod_materials.json
-  - prod_user_materials.json
 
-- Result files used for analysis:
-  - dev_materials.csv
-  - dev_user_materials.csv
-  - prod_materials.csv
-  - prod_user_materials.csv
+**Table 1: Dataset files**
+Source file             | Result file
+-------------           | -------------
+dev_materials.json      | dev_materials.csv
+dev_user_materials.json | dev_user_materials.csv
+prod_materials.json     | prod_materials.csv
+prod_user_materials.json| prod_user_materials.csv
 
-Below the description of pre-processed data sets:
-
-**Table 1: Structure of dev_materialscsv & prod_materials.csv**
-Name of Column  | Description
+**Table 2: Structure of materials dataset**
+Column name     | Description
 -------------   | -------------
 _id.$oid        | Material ID
 materialType    | Type of content, such as: lecture, lab, test
@@ -92,19 +87,53 @@ video_minutes	| Duration of the embedded videos (if any)
 pics	        | Number of illustrations
 words           | Number of words
 
-
-**Table 2: Structure of dev_user_materials & prod_user_materials**
-Name of Column     |   Description
+**Table 3: Structure of user-materials dataset**
+Column name     |   Description
 -------------   |   -------------
 _id.$oid	    |   User-material association ID
 user_id.$oid    |   User ID
 material_id.$oid|   Material ID
 assignedAt.$date|   Timestamp when material was assigned to a user
 submitedAt.$date|   Timestamp when material was submitted by a user
-score           |   User score of lab or text (if any)
+score           |   User score of lab or test (if any)
 
 ## Dataset analysis
 <!-- Dataset is fully cleansed, visualized and analysed-->
+
+
+
+### Data cleaning and tunning
+
+Detailed steps for cleaning and analysing the resulting dataset can be found in the R script attached to the report (project.r).
+
+It should be noted that the raw data, due to the nature of the application of the platform, has a lot of noisy observations.
+
+The development environment was mainly used by platform and material developers. This means that the number of different materials is much larger (as well as the user-material associations), but the completion time of materials is often underestimated due to the specificity of testing. Nevertheless, the data from this environment also contains metrics from real users.
+
+Also, a large number of associations in both environments are incomplete, which means that the user has opened a material and has not completed it. The other extreme is when a user opens a short material, gets distracted and finalises it after a few days.
+
+The initial number of observations for combined materials is 1173 observations and for user-material associations is 3399 observations.
+
+Since the main outcome variable is the actual completion time (duration in minutes) of the material, we need to remove observations from user materials that either do not have a submission (completion) time or (for whatever reason) do not have a start time.
+
+After extending (left-joining) the combined materials dataframe to user materials, we also remove observations that do not contain text (meta-materials).
+
+Now we can observe that for the remaining relevant associations there is a huge spread in completion time (Appendix 1. Figure 1), so that there are observations where the completion time is over 200,000 minutes.
+
+However, before removing these extreme outliers, as we will treat each material type separately below, we first divide them into separate dataframes and then remove extreme outliers for each dataframe.
+
+Additional assumptions are made for clearing:
+ - Lectures with completion time <1 minute are considered skipped and removed.
+ - Lectures with accompanying videos where the total duration of the videos is greater than the completion time of the lecture are considered skipped and removed.
+ - Labs with completion time <5 minutes or with no score are considered skipped and removed.
+ - Tests with no score are considered skipped and removed.
+
+**Table 4: Resulting dataframes after cleaning**
+Dataframe | Observations  |  Mean completion time (mins)
+----------| ------------- | ------------- 
+lectures  | 120           | 5.77
+labs      | 33            | 71.5
+tests     | 288           | 4.08
 
 ### Machine learning models
 <!-- More than three models applied and finetuned. If you choose for Regression, Association of Clustering, only one model is available. But you need that one apply a model with some set of parameters-->
