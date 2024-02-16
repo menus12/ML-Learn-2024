@@ -16,21 +16,20 @@ options(scipen = 999)
 
 # #################### Loading and clearing dev data
 
-# Loading data files sheets 
+# Loading csv files 
 dev_materials <- read.csv('Datafiles/dev_materials.csv')
 dev_user_materials <- read.csv('Datafiles/dev_user_materials.csv')
 
 # Renaming and reordering some columns
-names(dev_materials)[6] <- "material_id"
-colnames(dev_user_materials) <- c("passed", "id", 
+names(dev_materials)[5] <- "material_id"
+colnames(dev_user_materials) <- c("id", 
                                   "material_id", "user_id", "assigned_at", 
                                   "score", "submitted_at")
 dev_user_materials <- dev_user_materials[, c("id", "material_id", 
-                                             "user_id", "completed", "score", 
+                                             "user_id", "score", 
                                              "assigned_at", "submitted_at")]
-
-# Converting "completed" column from chr to boolean
-dev_user_materials$completed <- as.logical(dev_user_materials$completed)
+# Adding environment marker for clarity
+dev_user_materials$env <- "dev"
 
 # Converting time columns from chr to datetime
 dev_user_materials$assigned_at <- as.POSIXct(dev_user_materials$assigned_at,
@@ -41,21 +40,20 @@ dev_user_materials$submitted_at <- as.POSIXct(dev_user_materials$submitted_at,
 
 # #################### Loading and clearing prod data
 
-# Loading data files sheets 
+# Loading csv files 
 prod_materials <- read.csv('Datafiles/prod_materials.csv')
 prod_user_materials <- read.csv('Datafiles/prod_user_materials.csv')
 
 # Renaming and reordering some columns
-names(prod_materials)[6] <- "material_id"
-colnames(prod_user_materials) <- c("passed", "id", 
+names(prod_materials)[5] <- "material_id"
+colnames(prod_user_materials) <- c("id", 
                                    "material_id", "user_id", "assigned_at", 
                                    "submitted_at", "score")
 prod_user_materials <- prod_user_materials[, c("id", "material_id", 
-                                               "user_id", "completed", "score", 
+                                               "user_id", "score", 
                                                "assigned_at", "submitted_at")]
-
-# Converting "completed" column from chr to boolean
-prod_user_materials$completed <- as.logical(prod_user_materials$completed)
+# Adding environment marker for clarity
+prod_user_materials$env <- "prod"
 
 # Converting time columns from chr to datetime
 prod_user_materials$assigned_at <- as.POSIXct(prod_user_materials$assigned_at,
@@ -81,20 +79,25 @@ com_filtered$time_diff <- round(as.double(com_filtered$submitted_at -
 # Joining materials metadata
 com_filtered <- left_join(com_filtered, combined_materials, by = "material_id") 
 
-# Clearing rows with no match on material_id
+# Exploring unique and missing data for combined dataframe
+data.frame(unique=sapply(com_filtered, function(x) sum(length(unique(x, na.rm = TRUE)))), 
+           missing=sapply(com_filtered, function(x) sum(is.na(x) | x == 0)))
+
+# Clearing rows with no text (words)
 com_filtered <- com_filtered %>% drop_na("words")
 
-
-ggplot(com_filtered, aes(x = materialType, y = time_diff))+
+# Plotting boxplot to check spread in completion time by material type
+ggplot(com_filtered, aes(x = materialType, y = time_diff)) +
   geom_boxplot()+
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) + 
+  labs(x = "Material type", 
+       y = "Completion time (mins)",
+       title = "Spread in completion time by material type")
 
 # Dividing dataset by material type
 lectures <- com_filtered %>% filter(materialType == "lecture")
 labs <- com_filtered %>% filter(materialType == "lab")
-tests <- com_filtered %>% filter(materialType == "test-exam" | 
-                                   materialType == "test")
-
+tests <- com_filtered %>% filter(materialType == "test")
 
 # Removing extreme outliers for lectures
 Q <- quantile(lectures$time_diff, probs=c(.25, .75), na.rm = FALSE)
@@ -102,21 +105,32 @@ iqr <- IQR(lectures$time_diff)
 lectures <- subset(lectures, lectures$time_diff > (Q[1] - 1.5*iqr) & 
                      lectures$time_diff < (Q[2]+1.5*iqr))
 
-boxplot(lectures$time_diff)
+# Check spread in completion time after removing outliers
+boxplot(lectures$time_diff,
+        xlab = "Lectures",
+        ylab = "Completion time (mins)")
 
+# Removing extreme outliers for labs
 Q <- quantile(labs$time_diff, probs=c(.25, .75), na.rm = FALSE)
 iqr <- IQR(labs$time_diff)
 labs <- subset(labs, labs$time_diff > (Q[1] - 1.5*iqr) & 
                  labs$time_diff < (Q[2]+1.5*iqr))
 
-boxplot(labs$time_diff)
+# Check spread in completion time after removing outliers
+boxplot(labs$time_diff,
+        xlab = "Lectures",
+        ylab = "Completion time (mins)")
 
+# Removing extreme outliers for tests
 Q <- quantile(tests$time_diff, probs=c(.25, .75), na.rm = FALSE)
 iqr <- IQR(tests$time_diff)
 tests <- subset(tests, tests$time_diff > (Q[1] - 1.5*iqr) & 
                   tests$time_diff < (Q[2]+1.5*iqr))
 
-boxplot(tests$time_diff)
+# Check spread in completion time after removing outliers
+boxplot(labs$time_diff,
+        xlab = "Lectures",
+        ylab = "Completion time (mins)")
 
 ################################ Analyzing completion time for lectures
 
