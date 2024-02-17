@@ -144,13 +144,15 @@ The datasets can be used to perform statistical analyses that will help provide 
 
 To create a linear regression model, it is necessary to identify an outcome (dependent) variable and predictor (independent) variable(s). In statistical terms this will form an equation, Y = a + bX. Y is the outcome variable, x will be the predictor, a represents the intercept and bX represents the slope associated with the predictor variable.
 
-After cleaning the dataframes, the use of linear models has been applied to the datasets of lectures, labs and tests. The visuals of these models is in the Appendix 1. Figure 5 through 7.
+After cleaning the dataframes, the use of linear models has been applied to the datasets of lectures, labs and tests. The related variable are words pictures and videos. The dependent variable will be time difference. 
 
 
 ## Results of the data analysis
 <!-- Results of the data analysis: The actual answer of the research questions based on data analysis, the use of specific graphs to gain insight into the answers to the questions and the results of the hypothesis testing -->
 
-The results of the regression model where the 3 variables have been included, is below:
+### Analyzing completion time for lectures
+
+The visuals of these models is in the Appendix 1. Figure 5 through 7. The results of the regression model where the 3 variables have been included for the Lectures, is below:
 
 lectures_model <- lm(time_diff ~ words + pics + video_minutes, data = lectures)
 
@@ -197,6 +199,11 @@ lectures %>% select(time_diff, words, pics, video_minutes) %>% cor()
 | video_minutes| 0.2235376 | 0.0880509| 0.3311033| 1.00000000    |
 
 In the output above, this correlation matrix mixes the variables and each cell represents the correlection coefficient between two variables. For example, the correlation coefficient between 'words' and 'pics' is 0.4302708. This relationship can be categorized as a medium positive correlation between the number of words and pictures. So if the words are increased, the more pictures are included as well.
+
+### Analyzing completion time for labs
+
+
+
 
 
 ### Model applications
