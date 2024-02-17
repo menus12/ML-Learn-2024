@@ -34,7 +34,7 @@ The NSALAB Learn platform stores all information in a NoSQL database (MongoDB) i
 - **materials** - a collection of study actual materials, such as:
   - *lectures* - theoretical materials on a certain topic 
   - *labs* - practical assignments on certain topics where the user has mechanics to deploy a lab environment in the public cloud, including guidelines to accomplish lab assignments and an assessment engine to automatically grade the lab
-  - *Tests* - short quizes on certain topics
+  - *Tests* - short quizzes on certain topics
   - *Courses* - collection of lectures, labs and tests grouped together 
   - *Test-exams* - exams on certain courses
   - *learning paths* - collection of courses grouped together
@@ -65,7 +65,7 @@ For simplicity, the pre-processing is done using the following scripts written i
 
 The typical study material of each type is essentially a text, which may be supported by videos or illustrations. So we want to extract the total duration of videos, the number of images and count the number of words for each material. As the source text is in Markdown format and all assets are embedded in the source text, we also need to remove all links to previously counted assets and non-alpha-numeric characters to make the word count more accurate.
 
-### Convertion to tabular data
+### Conversion to tabular data
 
 Since the raw JSON data contains a lot of data (e.g. material sources, deployment logs, etc.) which is not relevant for further analysis, the purpose of the conversion script is to whitelist only relevant features for both types of files and save these collections as CSV.
 
@@ -97,15 +97,15 @@ assignedAt.$date|   Timestamp when material was assigned to a user
 submitedAt.$date|   Timestamp when material was submitted by a user
 score           |   User score of lab or test (if any)
 
-## Preliminary analysis, cleaning and tunning
+## Preliminary analysis, cleaning and tuning
 
-Detailed steps for cleaning and analysing the resulting dataset can be found in the R script attached to the report (project.r).
+Detailed steps for cleaning and analyzing the resulting dataset can be found in the R script attached to the report (project.r).
 
 It should be noted that the raw data, due to the nature of the application of the platform, has a lot of noisy observations.
 
 The development environment was mainly used by platform and material developers. This means that the number of different materials is much larger (as well as the user-material associations), but the completion time of materials is often underestimated due to the specificity of testing. Nevertheless, the data from this environment also contains metrics from real users.
 
-Also, a large number of associations in both environments are incomplete, which means that the user has opened a material and has not completed it. The other extreme is when a user opens a short material, gets distracted and finalises it after a few days.
+Also, a large number of associations in both environments are incomplete, which means that the user has opened a material and has not completed it. The other extreme is when a user opens a short material, gets distracted and finalizes it after a few days.
 
 The initial number of observations for combined materials is 1173 observations and for user-material associations is 3399 observations.
 
@@ -130,7 +130,7 @@ lectures  | 120           | 5.77
 tests     | 288           | 4.08
 labs      | 33            | 71.5
 
-The visuals of the dataframes is in the Appendix 1. Figure 2 through 4.
+The visuals of the dataframes are in the Appendix 1. Figure 2 through 4.
 
 ## Machine learning models
 <!-- More than three models applied and finetuned. If you choose for Regression, Association of Clustering, only one model is available. But you need that one apply a model with some set of parameters-->
@@ -150,7 +150,7 @@ After cleaning the dataframes, the use of linear models has been applied to the 
 
 ### Correlation in completion time for lectures
 
-The visuals of these models is in the Appendix 2. The results of the regression model where the 3 variables have been included for the Lectures, is below:
+The visuals of these models are in the Appendix 2. The results of the regression model where the 3 variables have been included for the Lectures, is below:
 
 #### Regression table
 
@@ -163,7 +163,7 @@ The visuals of these models is in the Appendix 2. The results of the regression 
 
 The estimate for the intercept is 4.60 with a standard error of 0.811. The intercept represents the expected value of completion time when all other variables are zero. This means that the model predicts a baseline completion time of 4.60 minutes when there are no words, illustrations, or video minutes included.
 
-For the **Words**, **Pics**, **Video_minutes** variables, these indicate the change in the dependent variable for a one-unit change in each independent variable, and where other variables will be constant. For 'video_minutes', the estimate is 0.473 which means that for each additional unit increase in 'video_minutes', the Time Difference variable increases on average by 0.473 units. Note that coefficient for words is not 0 but 0.0004105351.
+For the **Words**, **Pics**, **Video_minutes** variables, these indicate the change in the dependent variable for a one-unit change in each independent variable, and where other variables will be constant. For 'video_minutes', the estimate is 0.473 which means that for each additional unit increase in 'video_minutes', the Time Difference variable increases on average by 0.473 units. Note that the coefficient for words is not 0 but 0.0004105351.
 
 #### Regression points
 
@@ -176,7 +176,7 @@ For the **Words**, **Pics**, **Video_minutes** variables, these indicate the cha
 | 5   | 2.92      | 1209  | 0    | 0             | 5.10          | -2.17    |
 | ... | ...       | ...   | ...  | ...           | ...           | ...      |
 
-The output of the regression analysis is appied to the individual data points. Each row is an observation aka datapoint. As mentioned before, the time_diff is the dependant variable, whereas the words, pics, and video_minutes columns are the independent variables. The time_diff_hat contains the predicted values based on the regression model and the residual column shows the difference between the actual values and the predicted values. For example, as seen in the first row, the actual 'time_diff' is 4.17, and the predicted 'time_diff_hat' is 4.96. The difference between these two values, which is the residual, is -0.792. This means that the model, for this observation/row, shows the (underpredicted) time difference by 0.792 units.
+The output of the regression analysis is applied to the individual data points. Each row is an observation aka datapoint. As mentioned before, the time_diff is the dependent variable, whereas the words, pics, and video_minutes columns are the independent variables. The time_diff_hat contains the predicted values based on the regression model and the residual column shows the difference between the actual values and the predicted values. For example, as seen in the first row, the actual 'time_diff' is 4.17, and the predicted 'time_diff_hat' is 4.96. The difference between these two values, which is the residual, is -0.792. This means that the model, for this observation/row, shows the (underpredicted) time difference by 0.792 units.
 
 #### Correlation matrix
 
@@ -187,11 +187,11 @@ The output of the regression analysis is appied to the individual data points. E
 | pics         | 0.2142630 | 0.4302708| 1.0000000| 0.33110331    |
 | video_minutes| 0.2235376 | 0.0880509| 0.3311033| 1.00000000    |
 
-In the output above, this correlation matrix mixes the variables and each cell represents the correlection coefficient between two variables. For example, the correlation coefficient between 'words' and 'pics' is 0.4302708. This relationship can be categorized as a medium positive correlation between the number of words and pictures. So if the words are increased, the more pictures are included as well.
+In the output above, this correlation matrix mixes the variables and each cell represents the correlation coefficient between two variables. For example, the correlation coefficient between 'words' and 'pics' is 0.4302708. This relationship can be categorized as a medium positive correlation between the number of words and pictures. So if the words are increased, the more pictures are included as well.
 
 Correlation values for completion time are straightforward - the more words, illustrations and videos we have in a lecture - the more time it takes to finish it.
 
-#### Prediction equestion
+#### Prediction equation
 
 Putting these results together, the equation of the regression plane that gives us fitted values of completion time is:
 
@@ -201,7 +201,7 @@ $\hat{y}$ = $4.60$ + $0.0004105351$ * $words$ + $0.146$ * $pics$ + $0.473$ * $vi
 
 ### Correlation in completion time for labs
 
-The visuals of these models is in the Appendix 3. The results of the regression model where the 3 variables have been included for the Labs, is below:
+The visuals of these models are in the Appendix 3. The results of the regression model where the 3 variables have been included for the Labs, is below:
 
 #### Regression table
 
@@ -248,7 +248,7 @@ $\hat{y}$ = $168$ - $0.322$ * $words$ + $17.4$ * $pics$ - $0.241$ * $score$.
 
 ### Correlation in completion time for tests
 
-The visuals of these models is in the Appendix 4. The results of the regression model where the 3 variables have been included for the Tests, is below:
+The visuals of these models are in the Appendix 4. The results of the regression model where the 3 variables have been included for the Tests, is below:
 
 #### Regression table
 
