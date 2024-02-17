@@ -236,8 +236,6 @@ Given the output of the regression analysis is appied to the individual data poi
 | pics     | -0.4375514 | 0.9529337  | 1.0000000  | 0.2139325  |
 | score    | -0.3592358 | 0.2866705  | 0.2139325  | 1.0000000  |
 
-In the output above, this correlation matrix mixes the variables and each cell represents the correlection coefficient between two variables. For example, the correlation coefficient between 'score' and 'pics' is 0.2139325. This relationship can be categorized as a (low) positive linear relationship between the score and pictures. 
-
 It's worth noting that the time it takes to complete labs includes not only reading time, but also the time it takes to set up the infrastructure in a public cloud and the time it takes to actually implement the lab objectives. Even, such a negative correlation between completion time and number of accompanying illustrations can be explained by the fact that the more descriptive the lab guidelines are (more text and more illustrations), the less time it takes to actually complete the lab. In reality the number of legitimate observations is too small and considering noisy character of data, it's evident that this model can't be used to predict completion time for labs in this case.
 
 #### Prediction equestion
