@@ -140,7 +140,7 @@ The visuals of the dataframes is in the Appendix 1. Figure 2 through 4.
 ### Machine learning models
 <!-- More than three models applied and finetuned. If you choose for Regression, Association of Clustering, only one model is available. But you need that one apply a model with some set of parameters-->
 
-The datasets can be used to perform statistical analyses that will help provide evidence and insights into the impact of various factors on completion times  and whether these effects are statistically significant. The model that has been applied is Regression.
+The datasets can be used to perform statistical analyses that will help provide evidence and insights into the impact of various factors on completion times and whether these effects are statistically significant. The model that has been applied is Regression and will be applied with different parameters (labs, lectures, tests).
 
 To create a linear regression model, it is necessary to identify an outcome (dependent) variable and predictor (independent) variable(s). In statistical terms this will form an equation, Y = a + bX. Y is the outcome variable, x will be the predictor, a represents the intercept and bX represents the slope associated with the predictor variable.
 
@@ -202,7 +202,7 @@ In the output above, this correlation matrix mixes the variables and each cell r
 
 ### Analyzing completion time for labs
 
-The visuals of these models is in the Appendix 3. The results of the regression model where the 3 variables have been included for the Lectures, is below:
+The visuals of these models is in the Appendix 3. The results of the regression model where the 3 variables have been included for the Labs, is below:
 
 labs_model <- lm(time_diff ~ words + pics + video_minutes, data = labs)
 
@@ -249,6 +249,13 @@ labs %>% select(time_diff, words, pics, score) %>% cor()
 
 In the output above, this correlation matrix mixes the variables and each cell represents the correlection coefficient between two variables. For example, the correlation coefficient between 'score' and 'pics' is 0.2139325. This relationship can be categorized as a (low) positive linear relationship between the score and pictures. So if the pictures are increased, the score is increased as well, the relationship is weak though.
 
+### Analyzing completion time for tests
+
+The visuals of these models is in the Appendix 4. The results of the regression model where the 3 variables have been included for the Tests, is below:
+
+tests_model <- lm(time_diff ~ words + score, data = tests)
+
+get_regression_table(tests_model)
 
 ### Model applications
 <!-- R code is correct and well documented-->
