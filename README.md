@@ -242,7 +242,7 @@ It's worth noting that the time it takes to complete labs includes not only read
 
 Nevertheleess, the equation of the regression plane that gives us fitted values of lab completion time is:
 
-$\hat{y}$ = $b_{0}$ + $b_{words}$ * $words$ + $b_{pics}$ * $score$ + $b_{score}$ * $score$
+$\hat{y}$ = $b_{0}$ + $b_{words}$ * $words$ + $b_{pics}$ * $pics$ + $b_{score}$ * $score$
 
 $\hat{y}$ = $168$ - $0.322$ * $words$ + $17.4$ * $pics$ - $0.241$ * $score$.
 
@@ -281,7 +281,15 @@ Based on the output of the regression analysis applied to the individual data po
 | words     | 0.3392588 | 1.00000000 | 0.09581535
 | score     | 0.1948520 | 0.09581535 | 1.00000000
 
+The values in the correlation matrix, as in the case of lectures, are quite straightforward. The more text in the test and the higher the score, the more time it takes to complete the test.
+
 #### Prediction equestion
+
+The equation of the regression plane that gives us fitted values of test completion time is:
+
+$\hat{y}$ = $b_{0}$ + $b_{words}$ * $words$ + $b_{score}$ * $score$
+
+$\hat{y}$ = $1.06$ - $0.015$ * $words$ + $0.019$ * $score$.
 
 ### Model applications
 <!-- R code is correct and well documented-->
