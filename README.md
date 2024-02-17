@@ -97,12 +97,7 @@ assignedAt.$date|   Timestamp when material was assigned to a user
 submitedAt.$date|   Timestamp when material was submitted by a user
 score           |   User score of lab or test (if any)
 
-## Dataset analysis
-<!-- Dataset is fully cleansed, visualized and analysed-->
-
-
-
-### Data cleaning and tunning
+## Preliminary analysis, cleaning and tunning
 
 Detailed steps for cleaning and analysing the resulting dataset can be found in the R script attached to the report (project.r).
 
@@ -132,8 +127,8 @@ Additional assumptions are made for clearing:
 Dataframe | Observations  |  Mean completion time (mins)
 ----------| ------------- | ------------- 
 lectures  | 120           | 5.77
-labs      | 33            | 71.5
 tests     | 288           | 4.08
+labs      | 33            | 71.5
 
 The visuals of the dataframes is in the Appendix 1. Figure 2 through 4.
 
