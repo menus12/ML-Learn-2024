@@ -203,7 +203,6 @@ The visuals of these models is in the Appendix 3. The results of the regression 
 
 #### Regression table
 
-A tibble: 4 × 7
 | term      | estimate | std_error | statistic | p_value | lower_ci | upper_ci |
 |-----------|----------|-----------|-----------|---------|----------|----------|
 | intercept | 168.     | 25.1      | 6.70      | 0       | 117.     | 219.     |
@@ -215,7 +214,6 @@ As seen in the table above, the intercept is 168, indicating the (expected) valu
 
 #### Regression points
 
-A tibble: 120 × 7
 | ID  | time_diff | words | pics | score | time_diff_hat | residual |
 |-----|-----------|-------|------|-------|---------------|----------|
 | 1   | 28.1      | 738   | 7    | 100   | 27.8          | 0.246    |
