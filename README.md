@@ -196,6 +196,8 @@ lectures %>% select(time_diff, words, pics, video_minutes) %>% cor()
 | pics         | 0.2142630 | 0.4302708| 1.0000000| 0.33110331    |
 | video_minutes| 0.2235376 | 0.0880509| 0.3311033| 1.00000000    |
 
+In the output above, this correlation matrix mixes the variables and each cell represents the correlection coefficient between two variables. For example, the correlation coefficient between 'words' and 'pics' is 0.4302708. This relationship can be categorized as a medium positive correlation between the number of words and pictures. So if the words are increased, the more pictures are included as well.
+
 
 ### Model applications
 <!-- R code is correct and well documented-->
