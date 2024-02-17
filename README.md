@@ -135,8 +135,15 @@ lectures  | 120           | 5.77
 labs      | 33            | 71.5
 tests     | 288           | 4.08
 
+The visuals of the dataframes is in the Appendix 1. Figure 2 through 4.
+
 ### Machine learning models
 <!-- More than three models applied and finetuned. If you choose for Regression, Association of Clustering, only one model is available. But you need that one apply a model with some set of parameters-->
+
+The datasets can be used to perform statistical analyses that will help provide evidence and insights into the impact of various factors on completion times  and whether these effects are statistically significant. To create a linear regression model, it is necessary to identify an outcome (dependent) variable and predictor (independent) variable(s). In statistical terms this will form an equation, Y = a + bX. Y is the outcome variable, x will be the predictor, a represents the intercept and bX represents the slope associated with the predictor variable.
+
+After cleaning the dataframes, the use of linear models has been applied to the datasets of lectures, labs and tests. The visuals of these models is in the Appendix 1. Figure 5 through 7.
+
 
 ## Results of the data analysis
 <!-- Results of the data analysis: The actual answer of the research questions based on data analysis, the use of specific graphs to gain insight into the answers to the questions and the results of the hypothesis testing -->
