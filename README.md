@@ -225,7 +225,7 @@ As seen in the table above, the intercept is 168, indicating the (expected) valu
 | 5   | 36.7      | 420   | 1    | 100   | 26.0          | 10.7     |
 | ... | ...       | ...   | ...  | ...   | ...           | ...      |
 
-The output of the regression analysis is appied to the individual data points. Each row is an observation aka datapoint. The time_diff is the dependant variable, whereas the words, pics, and score columns are the independent variables. The time_diff_hat contains the predicted values based on the regression model and the residual column shows the difference between the actual values and the predicted values. As seen in the first row, the actual 'time_diff' is 28.1, and the predicted 'time_diff_hat' is 27.8. The difference between these two values, which is the residual, is 0.246. This means that the model, for this observation/row, shows the (overpredicted) time difference by 0.246 units.
+Given the output of the regression analysis is appied to the individual data points, we can notice residuals have significant spread which can raise a significant concern in practical application of this model.
 
 #### Correlation matrix
 
@@ -260,6 +260,8 @@ The visuals of these models is in the Appendix 4. The results of the regression 
 |words      | 0.015    | 0.003     | 5.87  | 0      |  0.01   |  0.021
 |score      | 0.019    | 0.006     | 2.97  | 0.003  |  0.006  |  0.032
 
+As seen in the table above, the intercept is 1.06, indicating the (expected) value of the dependent variable (completion time) when all independant variables are zero. For the Words and Score variables, these indicate the change in the dependent variable for a one-unit change in each independent variable, and where other variables will be constant. For instance for 'score', the estimate is 0.019 which means that for each additional unit increase in 'score', the completion time variable increased on average by 0.019 units.
+
 #### Regression points
 
 | ID  | time_diff | words |score | time_diff_hat | residual |
@@ -269,11 +271,7 @@ The visuals of these models is in the Appendix 4. The results of the regression 
 | 3   |   0.92    |  51  | 100    |      3.76  |  -2.84
 | 4   |   0.65    |  64  |  50    |      3.00  |  -2.35
 | 5   |   2.08    | 208  |  80    |      5.79  |  -3.71
-| 6   |   0.27    | 129  |   0    |      3.04  |  -2.77
-| 7   |   0.8     |  51  | 100    |      3.76  |  -2.96
-| 8   |   2.37    |  64  |  75    |      3.48  |  -1.11
-| 9   |   1.37    | 129  | 100    |      4.96  |  -3.59
-|10   |   0.68    |  51  | 100    |      3.76  |  -3.08
+| ... | ...       | ...  | ...    | ...        | ...        
 
 #### Correlation matrix
 
