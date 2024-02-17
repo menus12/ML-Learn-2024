@@ -67,7 +67,7 @@ The typical study material of each type is essentially a text, which may be supp
 
 ### Convertion to tabular data
 
-Since raw JSON data contains a lot of data (e.g. material sources, deployment logs, etc.) which is not relevant for further analysis, the purpose of the conversion script is to whitelist only relevant features for both types of files and save these collections as CSV.
+Since the raw JSON data contains a lot of data (e.g. material sources, deployment logs, etc.) which is not relevant for further analysis, the purpose of the conversion script is to whitelist only relevant features for both types of files and save these collections as CSV.
 
 
 **Table 1: Dataset files**
