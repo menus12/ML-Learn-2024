@@ -132,14 +132,18 @@ labs      | 33            | 71.5
 
 The visuals of the dataframes is in the Appendix 1. Figure 2 through 4.
 
-### Machine learning models
+## Machine learning models
 <!-- More than three models applied and finetuned. If you choose for Regression, Association of Clustering, only one model is available. But you need that one apply a model with some set of parameters-->
 
-The datasets can be used to perform statistical analyses that will help provide evidence and insights into the impact of various factors on completion times and whether these effects are statistically significant. The model that has been applied is Regression and will be applied with different parameters (labs, lectures, tests).
+The datasets can be used to perform statistical analyses that will help provide evidence and insights into the impact of various factors on completion times and whether these effects are statistically significant. The model that has been applied is Regression and will be applied with different parameters for each material type (labs, lectures, tests).
 
-To create a linear regression model, it is necessary to identify an outcome (dependent) variable and predictor (independent) variable(s). In statistical terms this will form an equation, Y = a + bX. Y is the outcome variable, x will be the predictor, a represents the intercept and bX represents the slope associated with the predictor variable.
+To create a linear regression model, it is necessary to identify an outcome (dependent) variable and predictor (independent) variable(s). In statistical terms this will form an equation, $\hat{y}$ = $b_{0}$ + $b_{1}$ $*$ $x_{1}$. $\hat{y}$ is the outcome variable,  $x_{1}$ will be the predictor, $b_{0}$ represents the intercept and $b_{1}$ $*$ $x_{1}$ represents the slope associated with the predictor variable.
 
-After cleaning the dataframes, the use of linear models has been applied to the datasets of lectures, labs and tests. The related variable are words pictures and videos. The dependent variable will be time difference. 
+After cleaning the dataframes, the use of linear models has been applied to the dataframes of lectures, labs and tests. Following predictor variables will be considered for each type of material:
+
+- **lectures**: number of words, number of illustrations, duration of videos
+- **tests**: number of words, score
+- **labs**: number of words, number of illustrations, score
 
 
 ## Results of the data analysis
