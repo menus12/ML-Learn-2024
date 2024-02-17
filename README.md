@@ -248,13 +248,42 @@ $\hat{y}$ = $b_{0}$ + $b_{words}$ * $words$ + $b_{pics}$ * $score$ + $b_{score}$
 
 $\hat{y}$ = $168$ - $0.322$ * $words$ + $17.4$ * $pics$ - $0.241$ * $score$.
 
-### Analyzing completion time for tests
+### Correlation in completion time for tests
 
 The visuals of these models is in the Appendix 4. The results of the regression model where the 3 variables have been included for the Tests, is below:
 
-tests_model <- lm(time_diff ~ words + score, data = tests)
+#### Regression table
 
-get_regression_table(tests_model)
+| term      | estimate | std_error | statistic | p_value | lower_ci | upper_ci |
+|-----------|----------|-----------|-----------|---------|----------|----------|
+|intercept  | 1.06     | 0.539     | 1.96  | 0.051  | -0.003  |  2.12 
+|words      | 0.015    | 0.003     | 5.87  | 0      |  0.01   |  0.021
+|score      | 0.019    | 0.006     | 2.97  | 0.003  |  0.006  |  0.032
+
+#### Regression points
+
+| ID  | time_diff | words |score | time_diff_hat | residual |
+|-----|-----------|-------|------|---------------|----------|
+| 1   |   1.15    | 112  |  83    |      4.37  |  -3.22
+| 2   |   1.42    |  95  | 100    |      4.43  |  -3.02
+| 3   |   0.92    |  51  | 100    |      3.76  |  -2.84
+| 4   |   0.65    |  64  |  50    |      3.00  |  -2.35
+| 5   |   2.08    | 208  |  80    |      5.79  |  -3.71
+| 6   |   0.27    | 129  |   0    |      3.04  |  -2.77
+| 7   |   0.8     |  51  | 100    |      3.76  |  -2.96
+| 8   |   2.37    |  64  |  75    |      3.48  |  -1.11
+| 9   |   1.37    | 129  | 100    |      4.96  |  -3.59
+|10   |   0.68    |  51  | 100    |      3.76  |  -3.08
+
+#### Correlation matrix
+
+|         | time_diff | words      | score      |
+|---------|-----------|------------|------------|
+| time_diff | 1.0000000 | 0.33925881 | 0.19485197
+| words     | 0.3392588 | 1.00000000 | 0.09581535
+| score     | 0.1948520 | 0.09581535 | 1.00000000
+
+#### Prediction equestion
 
 ### Model applications
 <!-- R code is correct and well documented-->
