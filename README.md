@@ -137,7 +137,7 @@ The visuals of the dataframes is in the Appendix 1. Figure 2 through 4.
 
 The datasets can be used to perform statistical analyses that will help provide evidence and insights into the impact of various factors on completion times and whether these effects are statistically significant. The model that has been applied is Regression and will be applied with different parameters for each material type (labs, lectures, tests).
 
-To create a linear regression model, it is necessary to identify an outcome (dependent) variable and predictor (independent) variable(s). In statistical terms this will form an equation, $\hat{y}$ = $b_{0}$ + $b_{1}$ $*$ $x_{1}$. $\hat{y}$ is the outcome variable,  $x_{1}$ will be the predictor, $b_{0}$ represents the intercept and $b_{1}$ $*$ $x_{1}$ represents the slope associated with the predictor variable.
+To create a linear regression model, it is necessary to identify an outcome (dependent) variable and predictor (independent) variable(s). In statistical terms this will form an equation, $\hat{y}$ = $b_{0}$ + $b_{1}$ * $x_{1}$. $\hat{y}$ is the outcome variable,  $x_{1}$ will be the predictor, $b_{0}$ represents the intercept and $b_{1}$ * $x_{1}$ represents the slope associated with the predictor variable.
 
 After cleaning the dataframes, the use of linear models has been applied to the dataframes of lectures, labs and tests. Following predictor variables will be considered for each type of material:
 
@@ -167,7 +167,6 @@ For the **Words**, **Pics**, **Video_minutes** variables, these indicate the cha
 
 #### Regression points
 
-A tibble: 120 × 7
 | ID  | time_diff | words | pics | video_minutes | time_diff_hat | residual |
 |-----|-----------|-------|------|---------------|---------------|----------|
 | 1   | 4.17      | 885   | 0    | 0             | 4.96          | -0.792   |
