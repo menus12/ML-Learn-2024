@@ -189,11 +189,13 @@ The output of the regression analysis is appied to the individual data points. E
 
 In the output above, this correlation matrix mixes the variables and each cell represents the correlection coefficient between two variables. For example, the correlation coefficient between 'words' and 'pics' is 0.4302708. This relationship can be categorized as a medium positive correlation between the number of words and pictures. So if the words are increased, the more pictures are included as well.
 
+Correlation values for completion time are straightforward - the more words, illustrations and videos we have in a lecture - the more time it takes to finish it.
+
 #### Prediction equestion
 
 Putting these results together, the equation of the regression plane that gives us fitted values of completion time is:
 
- $\hat{y}$ = $b_{0}$ + $b_{words}$ * $words$ + $b_{pics}$ * $pics$ + $b_{video}$ * $video$
+$\hat{y}$ = $b_{0}$ + $b_{words}$ * $words$ + $b_{pics}$ * $pics$ + $b_{video}$ * $video$
 
 $\hat{y}$ = $4.60$ + $0.0004105351$ * $words$ + $0.146$ * $pics$ + $0.473$ * $video$.
 
