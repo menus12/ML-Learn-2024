@@ -14,7 +14,9 @@ library(infer)
 library(plotly)
 options(scipen = 999)
 
-# #################### Loading dev data
+#======================================================================
+# Loading dev data
+#======================================================================
 
 # Loading csv files 
 dev_materials <- read.csv('Datafiles/dev_materials.csv')
@@ -37,8 +39,9 @@ dev_user_materials$assigned_at <- as.POSIXct(dev_user_materials$assigned_at,
 dev_user_materials$submitted_at <- as.POSIXct(dev_user_materials$submitted_at,
                                               format="%Y-%m-%dT%H:%M:%S")
 
-
-# #################### Loading prod data
+#======================================================================
+# Loading prod data
+#======================================================================
 
 # Loading csv files 
 prod_materials <- read.csv('Datafiles/prod_materials.csv')
@@ -62,12 +65,15 @@ prod_user_materials$submitted_at <- as.POSIXct(prod_user_materials$submitted_at,
                                                format="%Y-%m-%dT%H:%M:%S")
 
 
-# #################### Combining dev and prod 
-
+#======================================================================
+# Combining dev and prod 
+#======================================================================
 combined_materials <- rbind(dev_materials, prod_materials)
 combined_user_materials <- rbind(dev_user_materials, prod_user_materials)
 
-# #################### Cleaning user-materials associations
+#======================================================================
+# Cleaning user-materials associations
+#======================================================================
 
 # Filtering only completed materials
 com_filtered <- combined_user_materials %>% 
@@ -83,7 +89,7 @@ com_filtered <- left_join(com_filtered, combined_materials, by = "material_id")
 # Exploring unique and missing data for combined dataframe
 data.frame(unique=sapply(com_filtered, 
             function(x) sum(length(unique(x, na.rm = TRUE)))), 
-            missing=sapply(com_filtered, function(x) sum(is.na(x) | x == 0)))
+            missing=sapply(com_filtered, function(x) sum(is.na(x))))
 
 # Clearing rows with no text (words)
 com_filtered <- com_filtered %>% drop_na("words")
@@ -101,7 +107,9 @@ lectures <- com_filtered %>% filter(materialType == "lecture")
 labs <- com_filtered %>% filter(materialType == "lab")
 tests <- com_filtered %>% filter(materialType == "test")
 
-# #################### Cleaning lectures
+#======================================================================
+# Cleaning lectures
+#======================================================================
 
 # Removing extreme outliers for lectures
 Q <- quantile(lectures$time_diff, probs=c(.25, .75), na.rm = FALSE)
@@ -123,7 +131,9 @@ boxplot(lectures$time_diff,
 # Skimming completion time
 lectures$time_diff %>% skim()
 
-# #################### Cleaning labs
+#======================================================================
+# Cleaning labs
+#======================================================================
 
 # Removing extreme outliers for labs
 Q <- quantile(labs$time_diff, probs=c(.25, .75), na.rm = FALSE)
@@ -145,7 +155,9 @@ boxplot(labs$time_diff,
 # Skimming completion time
 labs$time_diff %>% skim()
 
-# #################### Cleaning tests
+#======================================================================
+# Cleaning tests
+#======================================================================
 
 # Removing extreme outliers for tests
 Q <- quantile(tests$time_diff, probs=c(.25, .75), na.rm = FALSE)
@@ -164,14 +176,15 @@ boxplot(tests$time_diff,
 # Skimming completion time
 tests$time_diff %>% skim()
 
-################################ Analyzing completion time for lectures
+#======================================================================
+# Analyzing completion time for lectures using 
+#======================================================================
 
 # Visualizing linear model (time vs words)
 ggplot(lectures, aes(x = words, y = time_diff)) +
   geom_jitter(alpha = 0.5) +
   labs(x = "Number of words", y = "Completion time (mins)") +
   geom_smooth(method = "lm", se = FALSE)
-
 
 # Visualizing linear model (time vs pics)
 ggplot(lectures, aes(x = pics, y = time_diff)) +
@@ -203,8 +216,9 @@ plot_ly(lectures, x = ~words, y = ~pics, z = ~video_minutes,
                  zaxis = list(title = 'Video Length'))
   )
 
-
-################################ Analyzing completion time for labs
+#======================================================================
+# Analyzing completion time for labs
+#======================================================================
 
 # Visualizing linear model (time vs words)
 ggplot(labs, aes(x = words, y = time_diff)) +
@@ -244,8 +258,9 @@ plot_ly(labs, x = ~words, y = ~pics, z = ~score,
                  zaxis = list(title = 'Score'))
   )
 
-
-################################ Analyzing completion time for tests
+#======================================================================
+# Analyzing completion time for tests
+#======================================================================
 
 # Visualizing linear model (time vs words)
 ggplot(tests, aes(x = words, y = time_diff)) +
