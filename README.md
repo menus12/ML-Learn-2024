@@ -238,7 +238,15 @@ The output of the regression analysis is appied to the individual data points. E
 
 In the output above, this correlation matrix mixes the variables and each cell represents the correlection coefficient between two variables. For example, the correlation coefficient between 'score' and 'pics' is 0.2139325. This relationship can be categorized as a (low) positive linear relationship between the score and pictures. 
 
-It's worth noting that the time it takes to complete labs includes not only reading time, but also the time it takes to set up the infrastructure in a public cloud and the time it takes to actually implement the lab objectives. Thus, such a negative correlation between completion time and number of accompanying illustrations can be explained by the fact that the more descriptive the lab guidelines are (more text and more illustrations), the less time it takes to actually complete the lab. The negative correlation with the score could also mean that if the lab is completed in a shorter time frame (with more concentration on the objectives), the score will be higher.
+It's worth noting that the time it takes to complete labs includes not only reading time, but also the time it takes to set up the infrastructure in a public cloud and the time it takes to actually implement the lab objectives. Even, such a negative correlation between completion time and number of accompanying illustrations can be explained by the fact that the more descriptive the lab guidelines are (more text and more illustrations), the less time it takes to actually complete the lab. In reality the number of legitimate observations is too small and considering noisy character of data, it's evident that this model can't be used to predict completion time for labs in this case.
+
+#### Prediction equestion
+
+Nevertheleess, the equation of the regression plane that gives us fitted values of lab completion time is:
+
+$\hat{y}$ = $b_{0}$ + $b_{words}$ * $words$ + $b_{pics}$ * $score$ + $b_{score}$ * $score$
+
+$\hat{y}$ = $168$ - $0.322$ * $words$ + $17.4$ * $pics$ - $0.241$ * $score$.
 
 ### Analyzing completion time for tests
 
