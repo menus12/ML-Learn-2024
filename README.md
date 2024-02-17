@@ -197,13 +197,11 @@ Putting these results together, the equation of the regression plane that gives 
 
 $\hat{y}$ = $4.60$ + $0.0004105351$ * $words$ + $0.146$ * $pics$ + $0.473$ * $video$.
 
-### Analyzing completion time for labs
+### Correlation in completion time for labs
 
 The visuals of these models is in the Appendix 3. The results of the regression model where the 3 variables have been included for the Labs, is below:
 
-labs_model <- lm(time_diff ~ words + pics + video_minutes, data = labs)
-
-get_regression_table(labs_model)
+#### Regression table
 
 A tibble: 4 × 7
 | term      | estimate | std_error | statistic | p_value | lower_ci | upper_ci |
@@ -213,9 +211,9 @@ A tibble: 4 × 7
 | pics      | 17.4     | 9.97      | 1.74      | 0.092   | -3.04    | 37.7     |
 | score     | -0.241   | 0.222     | -1.09     | 0.286   | -0.696   | 0.213    |
 
-As seen in the table above, the intercept is 168, indicating the (expected) value of the dependent variable (in this case Time Difference) when all independant variables are zero. For the Words, Pics, Score variables, these indicate the change in the dependent variable for a one-unit change in each independent variable, and where other variables will be constant. For 'score', the estimate is -0.241 which means that for each additional unit increase in 'score', the Time Difference variable decreases on average by 0.241 units.
+As seen in the table above, the intercept is 168, indicating the (expected) value of the dependent variable (completion time) when all independant variables are zero. For the Words, Pics, Score variables, these indicate the change in the dependent variable for a one-unit change in each independent variable, and where other variables will be constant. For 'score', the estimate is -0.241 which means that for each additional unit increase in 'score', the completion time variable decreases on average by 0.241 units.
 
-get_regression_points(labs_model)
+#### Regression points
 
 A tibble: 120 × 7
 | ID  | time_diff | words | pics | score | time_diff_hat | residual |
@@ -225,17 +223,11 @@ A tibble: 120 × 7
 | 3   | 17.3      | 472   | 4    | 100   | 61.4          | -44.1    |
 | 4   | 58.9      | 472   | 4    | 100   | 61.4          | -2.44    |
 | 5   | 36.7      | 420   | 1    | 100   | 26.0          | 10.7     |
-| 6   | 38.6      | 420   | 1    | 100   | 26.0          | 12.6     |
-| 7   | 31.1      | 472   | 4    | 100   | 61.4          | -30.3    |
-| 8   | 18.0      | 420   | 1    | 100   | 26.0          | -7.98    |
-| 9   | 123.      | 226   | 1    | 100   | 88.4          | 34.1     |
-| 10  | 122.      | 226   | 1    | 100   | 88.4          | 34.0     |
+| ... | ...       | ...   | ...  | ...   | ...           | ...      |
 
 The output of the regression analysis is appied to the individual data points. Each row is an observation aka datapoint. The time_diff is the dependant variable, whereas the words, pics, and score columns are the independent variables. The time_diff_hat contains the predicted values based on the regression model and the residual column shows the difference between the actual values and the predicted values. As seen in the first row, the actual 'time_diff' is 28.1, and the predicted 'time_diff_hat' is 27.8. The difference between these two values, which is the residual, is 0.246. This means that the model, for this observation/row, shows the (overpredicted) time difference by 0.246 units.
 
-The correlation between these variables is calculated as follows:
-
-labs %>% select(time_diff, words, pics, score) %>% cor()
+#### Correlation matrix
 
 |         | time_diff | words      | pics       | score      |
 |---------|-----------|------------|------------|------------|
@@ -244,7 +236,9 @@ labs %>% select(time_diff, words, pics, score) %>% cor()
 | pics     | -0.4375514 | 0.9529337  | 1.0000000  | 0.2139325  |
 | score    | -0.3592358 | 0.2866705  | 0.2139325  | 1.0000000  |
 
-In the output above, this correlation matrix mixes the variables and each cell represents the correlection coefficient between two variables. For example, the correlation coefficient between 'score' and 'pics' is 0.2139325. This relationship can be categorized as a (low) positive linear relationship between the score and pictures. So if the pictures are increased, the score is increased as well, the relationship is weak though.
+In the output above, this correlation matrix mixes the variables and each cell represents the correlection coefficient between two variables. For example, the correlation coefficient between 'score' and 'pics' is 0.2139325. This relationship can be categorized as a (low) positive linear relationship between the score and pictures. 
+
+It's worth noting that the time it takes to complete labs includes not only reading time, but also the time it takes to set up the infrastructure in a public cloud and the time it takes to actually implement the lab objectives. Thus, such a negative correlation between completion time and number of accompanying illustrations can be explained by the fact that the more descriptive the lab guidelines are (more text and more illustrations), the less time it takes to actually complete the lab. The negative correlation with the score could also mean that if the lab is completed in a shorter time frame (with more concentration on the objectives), the score will be higher.
 
 ### Analyzing completion time for tests
 
