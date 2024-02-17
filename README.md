@@ -212,7 +212,7 @@ The visuals of these models are in the Appendix 3. The results of the regression
 | pics      | 17.4     | 9.97      | 1.74      | 0.092   | -3.04    | 37.7     |
 | score     | -0.241   | 0.222     | -1.09     | 0.286   | -0.696   | 0.213    |
 
-As seen in the table above, the intercept is 168, indicating the (expected) value of the dependent variable (completion time) when all independant variables are zero. For the Words, Pics, Score variables, these indicate the change in the dependent variable for a one-unit change in each independent variable, and where other variables will be constant. For 'score', the estimate is -0.241 which means that for each additional unit increase in 'score', the completion time variable decreases on average by 0.241 units.
+As seen in the table above, the intercept is 168, indicating the (expected) value of the dependent variable (completion time) when all independent variables are zero. For the Words, Pics, Score variables, these indicate the change in the dependent variable for a one-unit change in each independent variable, and where other variables will be constant. For 'score', the estimate is -0.241 which means that for each additional unit increase in 'score', the completion time variable decreases on average by 0.241 units.
 
 #### Regression points
 
@@ -225,7 +225,7 @@ As seen in the table above, the intercept is 168, indicating the (expected) valu
 | 5   | 36.7      | 420   | 1    | 100   | 26.0          | 10.7     |
 | ... | ...       | ...   | ...  | ...   | ...           | ...      |
 
-Given the output of the regression analysis is appied to the individual data points, we can notice residuals have significant spread which can raise a significant concern in practical application of this model.
+Given the output of the regression analysis is applied to the individual data points, we can notice residuals have significant spread which can raise a significant concern in practical application of this model.
 
 #### Correlation matrix
 
@@ -238,9 +238,9 @@ Given the output of the regression analysis is appied to the individual data poi
 
 It's worth noting that the time it takes to complete labs includes not only reading time, but also the time it takes to set up the infrastructure in a public cloud and the time it takes to actually implement the lab objectives. Even, such a negative correlation between completion time and number of accompanying illustrations can be explained by the fact that the more descriptive the lab guidelines are (more text and more illustrations), the less time it takes to actually complete the lab. In reality the number of legitimate observations is too small and considering noisy character of data, it's evident that this model can't be used to predict completion time for labs in this case.
 
-#### Prediction equestion
+#### Prediction equation
 
-Nevertheleess, the equation of the regression plane that gives us fitted values of lab completion time is:
+Nevertheless, the equation of the regression plane that gives us fitted values of lab completion time is:
 
 $\hat{y}$ = $b_{0}$ + $b_{words}$ * $words$ + $b_{pics}$ * $pics$ + $b_{score}$ * $score$
 
@@ -258,7 +258,7 @@ The visuals of these models are in the Appendix 4. The results of the regression
 |words      | 0.015    | 0.003     | 5.87  | 0      |  0.01   |  0.021
 |score      | 0.019    | 0.006     | 2.97  | 0.003  |  0.006  |  0.032
 
-As seen in the table above, the intercept is 1.06, indicating the (expected) value of the dependent variable (completion time) when all independant variables are zero. For the Words and Score variables, these indicate the change in the dependent variable for a one-unit change in each independent variable, and where other variables will be constant. For instance for 'score', the estimate is 0.019 which means that for each additional unit increase in 'score', the completion time variable increased on average by 0.019 units.
+As seen in the table above, the intercept is 1.06, indicating the (expected) value of the dependent variable (completion time) when all independent variables are zero. For the Words and Score variables, these indicate the change in the dependent variable for a one-unit change in each independent variable, and where other variables will be constant. For instance for 'score', the estimate is 0.019 which means that for each additional unit increase in 'score', the completion time variable increased on average by 0.019 units.
 
 #### Regression points
 
@@ -283,7 +283,7 @@ Based on the output of the regression analysis applied to the individual data po
 
 The values in the correlation matrix, as in the case of lectures, are quite straightforward. The more text in the test and the higher the score, the more time it takes to complete the test.
 
-#### Prediction equestion
+#### Prediction equation
 
 The equation of the regression plane that gives us fitted values of test completion time is:
 
