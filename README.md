@@ -259,18 +259,29 @@ get_regression_table(tests_model)
 ### Model applications
 <!-- R code is correct and well documented-->
 
+R script separate
+
 ### Model evaluation & improvements
 <!-- Evaluation and improvement extensively done and elaborated-->
+
+Not sure if we need this one?
 
 ### Model comparison
 <!-- Comparison (Ensemble) properly done and elaborated -->
 
+Not sure if we need this one?
+
 ## Conclusions and recommendations
 <!-- including recommendations for further research -->
+
+
 
 ## Appendix
 
 Appendix 1: Grouped
+
 Appendix 2: Lectures
+
 Appendix 3: Labs
+
 Appendix 4: Tests
