@@ -15,6 +15,9 @@ library(plotly)
 options(scipen = 999)
 
 #======================================================================
+# Importing data
+#======================================================================
+#======================================================================
 # Loading dev data
 #======================================================================
 
@@ -71,6 +74,9 @@ prod_user_materials$submitted_at <- as.POSIXct(prod_user_materials$submitted_at,
 combined_materials <- rbind(dev_materials, prod_materials)
 combined_user_materials <- rbind(dev_user_materials, prod_user_materials)
 
+#======================================================================
+# Cleaning dataset
+#======================================================================
 #======================================================================
 # Cleaning user-materials associations
 #======================================================================
@@ -176,8 +182,12 @@ boxplot(tests$time_diff,
 # Skimming completion time
 tests$time_diff %>% skim()
 
+
 #======================================================================
-# Analyzing completion time for lectures using 
+# Results of the data analysis
+#======================================================================
+#======================================================================
+# Correlation in completion time for lectures
 #======================================================================
 
 # Visualizing linear model (time vs words)
@@ -198,13 +208,13 @@ ggplot(lectures, aes(x = video_minutes, y = time_diff)) +
   labs(x = "Duration of videos", y = "Completion time (mins)") +
   geom_smooth(method = "lm", se = FALSE)
 
+# Making a linear model, regression table and correlation matrix
 lectures_model <- lm(time_diff ~ words + pics + video_minutes, data = lectures)
 get_regression_table(lectures_model)
 get_regression_points(lectures_model)
 lectures %>% select(time_diff, words, pics, video_minutes) %>% cor()
 
-plot(lectures_model)
-
+# Visualizing 3D model based on all 3 variables colored with completion time
 marker <- list(color = ~time_diff, colorscale = c('#FFE1A1', '#683531'), 
                showscale = TRUE)
 plot_ly(lectures, x = ~words, y = ~pics, z = ~video_minutes, 
@@ -213,8 +223,8 @@ plot_ly(lectures, x = ~words, y = ~pics, z = ~video_minutes,
   layout(
     scene = list(xaxis = list(title = 'Number of words'),
                  yaxis = list(title = 'Number of pictures'),
-                 zaxis = list(title = 'Video Length'))
-  )
+                 zaxis = list(title = 'Video Length')))
+
 
 #======================================================================
 # Analyzing completion time for labs
@@ -225,7 +235,6 @@ ggplot(labs, aes(x = words, y = time_diff)) +
   geom_jitter(alpha = 0.5) +
   labs(x = "Number of words", y = "Completion time (mins)") +
   geom_smooth(method = "lm", se = FALSE)
-
 
 # Visualizing linear model (time vs pics)
 ggplot(labs, aes(x = pics, y = time_diff)) +
@@ -244,19 +253,14 @@ get_regression_table(labs_model)
 get_regression_points(labs_model)
 labs %>% select(time_diff, words, pics, score) %>% cor()
 
-plot(labs_model)
-
-
-
-
+# Visualizing 3D model based on all 3 variables colored with completion time
 plot_ly(labs, x = ~words, y = ~pics, z = ~score, 
         type="scatter3d", mode="markers",  marker = marker) %>%
   add_markers() %>%
   layout(
     scene = list(xaxis = list(title = 'Number of words'),
                  yaxis = list(title = 'Number of pictures'),
-                 zaxis = list(title = 'Score'))
-  )
+                 zaxis = list(title = 'Score')))
 
 #======================================================================
 # Analyzing completion time for tests
@@ -267,9 +271,6 @@ ggplot(tests, aes(x = words, y = time_diff)) +
   geom_jitter(alpha = 0.5) +
   labs(x = "Number of words", y = "Completion time (mins)") +
   geom_smooth(method = "lm", se = FALSE)
-
-# Removing outliers for word count
-tests <- tests %>% filter(words < 1000)
 
 # Visualizing linear model (time vs pics)
 ggplot(tests, aes(x = pics, y = time_diff)) +
@@ -288,11 +289,10 @@ get_regression_table(tests_model)
 get_regression_points(tests_model)
 tests %>% select(time_diff, words, score) %>% cor()
 
-plot(tests_model)
-
-plot_ly(tests %>% filter(words <= 550), x = ~words, y = ~score, z = ~time_diff, 
+# Visualizing 3D model based on 2 variables colored + completion time
+plot_ly(tests, x = ~words, y = ~score, z = ~time_diff, 
         type="scatter3d", mode="markers", marker = list(size=5, opacity=.9,  
-        color=~time_diff, colorscale = list(c(0,1), c("blue", "yellow")), colorbar=list(title='Completion time'))) %>%
+                                                        color=~time_diff, colorscale = list(c(0,1), c("blue", "yellow")), colorbar=list(title='Completion time'))) %>%
   add_markers() %>%
   layout(
     scene = list(xaxis = list(title = 'Number of words'),
@@ -301,7 +301,7 @@ plot_ly(tests %>% filter(words <= 550), x = ~words, y = ~score, z = ~time_diff,
   )
 
 # Visualizing linear model (time vs word and score)
-ggplot(tests %>% filter(words <= 550), aes(x = words, y = time_diff , color = score)) +
+ggplot(tests, aes(x = words, y = time_diff , color = score)) +
   geom_point() +
   labs(x = "Number of words", y = "Completion time (mins)", color = "Score") +
   scale_color_gradient(low="blue", high="yellow") +
