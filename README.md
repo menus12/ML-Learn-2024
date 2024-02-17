@@ -140,13 +140,62 @@ The visuals of the dataframes is in the Appendix 1. Figure 2 through 4.
 ### Machine learning models
 <!-- More than three models applied and finetuned. If you choose for Regression, Association of Clustering, only one model is available. But you need that one apply a model with some set of parameters-->
 
-The datasets can be used to perform statistical analyses that will help provide evidence and insights into the impact of various factors on completion times  and whether these effects are statistically significant. To create a linear regression model, it is necessary to identify an outcome (dependent) variable and predictor (independent) variable(s). In statistical terms this will form an equation, Y = a + bX. Y is the outcome variable, x will be the predictor, a represents the intercept and bX represents the slope associated with the predictor variable.
+The datasets can be used to perform statistical analyses that will help provide evidence and insights into the impact of various factors on completion times  and whether these effects are statistically significant. The model that has been applied is Regression.
+
+To create a linear regression model, it is necessary to identify an outcome (dependent) variable and predictor (independent) variable(s). In statistical terms this will form an equation, Y = a + bX. Y is the outcome variable, x will be the predictor, a represents the intercept and bX represents the slope associated with the predictor variable.
 
 After cleaning the dataframes, the use of linear models has been applied to the datasets of lectures, labs and tests. The visuals of these models is in the Appendix 1. Figure 5 through 7.
 
 
 ## Results of the data analysis
 <!-- Results of the data analysis: The actual answer of the research questions based on data analysis, the use of specific graphs to gain insight into the answers to the questions and the results of the hypothesis testing -->
+
+The results of the regression model where the 3 variables have been included, is below:
+
+lectures_model <- lm(time_diff ~ words + pics + video_minutes, data = lectures)
+
+get_regression_table(lectures_model)
+
+A tibble: 4 × 7
+| term          | estimate | std_error | statistic | p_value | lower_ci | upper_ci |
+|---------------|----------|-----------|-----------|---------|----------|----------|
+| intercept     | 4.60     | 0.811     | 5.67      | 0       | 2.99     | 6.20     |
+| words         | 0        | 0.001     | 0.566     | 0.572   | -0.001   | 0.002    |
+| pics          | 0.146    | 0.116     | 1.26      | 0.209   | -0.083   | 0.375    |
+| video_minutes | 0.473    | 0.256     | 1.84      | 0.068   | -0.035   | 0.981    |
+
+As seen in the table above, the intercept is 4.60, indidcating the expected value of the dependent variable (in this case Time Difference) when all independant variables are zero. For the Words, Pics, Video_minutes variables, these indicate the change in the dependent variable for a one-unit change in each independent variable, holding other variables constant. For instance, for 'video_minutes', the estimate is 0.473, suggesting that for each additional unit increase in 'video_minutes', the Time Difference variable increases by 0.473 units on average.
+
+get_regression_points(lectures_model)
+
+A tibble: 120 × 7
+| ID  | time_diff | words | pics | video_minutes | time_diff_hat | residual |
+|-----|-----------|-------|------|---------------|---------------|----------|
+| 1   | 4.17      | 885   | 0    | 0             | 4.96          | -0.792   |
+| 2   | 13.8      | 1954  | 0    | 0             | 5.40          | 8.42     |
+| 3   | 1.82      | 835   | 2    | 0             | 5.23          | -3.41    |
+| 4   | 3.3       | 286   | 0    | 0             | 4.72          | -1.42    |
+| 5   | 2.92      | 1209  | 0    | 0             | 5.10          | -2.17    |
+| 6   | 2.07      | 1058  | 3    | 0             | 5.47          | -3.40    |
+| 7   | 2.32      | 1470  | 2    | 0             | 5.49          | -3.17    |
+| 8   | 9.75      | 1171  | 11   | 0             | 6.68          | 3.06     |
+| 9   | 2.05      | 377   | 3    | 0             | 5.19          | -3.14    |
+| 10  | 4.2       | 1037  | 8    | 0             | 6.19          | -1.99    |
+| ... | ...       | ...   | ...  | ...           | ...           | ...      |
+
+The output of the regression analysis is appied to the individual data points. Each row is an observation aka datapoint. As mentioned before, the time_diff is the dependant variable, whereas the words, pics, and video_minutes columns are the independent variables. The time_diff_hat contains the predicted values based on the regression model and the residual column shows the difference between the actual values and the predicted values. For example, as seen in the first row, the actual 'time_diff' is 4.17, and the predicted 'time_diff_hat' is 4.96. The difference between these two values, which is the residual, is -0.792. This means that the model, for this observation/row, shows the (underpredicted) time difference by 0.792 units.
+
+The correlation between these variables is calculated as follows:
+
+lectures %>% select(time_diff, words, pics, video_minutes) %>% cor()
+
+|              | time_diff | words    | pics     | video_minutes |
+|--------------|-----------|----------|----------|---------------|
+| time_diff    | 1.0000000 | 0.1284185| 0.2142630| 0.22353759    |
+| words        | 0.1284185 | 1.0000000| 0.4302708| 0.08805087    |
+| pics         | 0.2142630 | 0.4302708| 1.0000000| 0.33110331    |
+| video_minutes| 0.2235376 | 0.0880509| 0.3311033| 1.00000000    |
+
 
 ### Model applications
 <!-- R code is correct and well documented-->
