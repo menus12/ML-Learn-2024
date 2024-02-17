@@ -145,19 +145,15 @@ After cleaning the dataframes, the use of linear models has been applied to the 
 - **tests**: number of words, score
 - **labs**: number of words, number of illustrations, score
 
-
 ## Results of the data analysis
 <!-- Results of the data analysis: The actual answer of the research questions based on data analysis, the use of specific graphs to gain insight into the answers to the questions and the results of the hypothesis testing -->
 
-### Analyzing completion time for lectures
+### Correlation in completion time for lectures
 
 The visuals of these models is in the Appendix 2. The results of the regression model where the 3 variables have been included for the Lectures, is below:
 
-lectures_model <- lm(time_diff ~ words + pics + video_minutes, data = lectures)
+#### Regression table
 
-get_regression_table(lectures_model)
-
-A tibble: 4 × 7
 | term          | estimate | std_error | statistic | p_value | lower_ci | upper_ci |
 |---------------|----------|-----------|-----------|---------|----------|----------|
 | intercept     | 4.60     | 0.811     | 5.67      | 0       | 2.99     | 6.20     |
@@ -165,9 +161,11 @@ A tibble: 4 × 7
 | pics          | 0.146    | 0.116     | 1.26      | 0.209   | -0.083   | 0.375    |
 | video_minutes | 0.473    | 0.256     | 1.84      | 0.068   | -0.035   | 0.981    |
 
-As seen in the table above, the intercept is 4.60, indicating the (expected) value of the dependent variable (in this case Time Difference) when all independant variables are zero. For the Words, Pics, Video_minutes variables, these indicate the change in the dependent variable for a one-unit change in each independent variable, and where other variables will be constant. For 'video_minutes', the estimate is 0.473 which means that for each additional unit increase in 'video_minutes', the Time Difference variable increases on average by 0.473 units.
+The estimate for the intercept is 4.60 with a standard error of 0.811. The intercept represents the expected value of completion time when all other variables are zero. This means that the model predicts a baseline completion time of 4.60 minutes when there are no words, illustrations, or video minutes included.
 
-get_regression_points(lectures_model)
+For the **Words**, **Pics**, **Video_minutes** variables, these indicate the change in the dependent variable for a one-unit change in each independent variable, and where other variables will be constant. For 'video_minutes', the estimate is 0.473 which means that for each additional unit increase in 'video_minutes', the Time Difference variable increases on average by 0.473 units. Note that coefficient for words is not 0 but 0.0004105351.
+
+#### Regression points
 
 A tibble: 120 × 7
 | ID  | time_diff | words | pics | video_minutes | time_diff_hat | residual |
@@ -177,18 +175,11 @@ A tibble: 120 × 7
 | 3   | 1.82      | 835   | 2    | 0             | 5.23          | -3.41    |
 | 4   | 3.3       | 286   | 0    | 0             | 4.72          | -1.42    |
 | 5   | 2.92      | 1209  | 0    | 0             | 5.10          | -2.17    |
-| 6   | 2.07      | 1058  | 3    | 0             | 5.47          | -3.40    |
-| 7   | 2.32      | 1470  | 2    | 0             | 5.49          | -3.17    |
-| 8   | 9.75      | 1171  | 11   | 0             | 6.68          | 3.06     |
-| 9   | 2.05      | 377   | 3    | 0             | 5.19          | -3.14    |
-| 10  | 4.2       | 1037  | 8    | 0             | 6.19          | -1.99    |
 | ... | ...       | ...   | ...  | ...           | ...           | ...      |
 
 The output of the regression analysis is appied to the individual data points. Each row is an observation aka datapoint. As mentioned before, the time_diff is the dependant variable, whereas the words, pics, and video_minutes columns are the independent variables. The time_diff_hat contains the predicted values based on the regression model and the residual column shows the difference between the actual values and the predicted values. For example, as seen in the first row, the actual 'time_diff' is 4.17, and the predicted 'time_diff_hat' is 4.96. The difference between these two values, which is the residual, is -0.792. This means that the model, for this observation/row, shows the (underpredicted) time difference by 0.792 units.
 
-The correlation between these variables is calculated as follows:
-
-lectures %>% select(time_diff, words, pics, video_minutes) %>% cor()
+#### Correlation matrix
 
 |              | time_diff | words    | pics     | video_minutes |
 |--------------|-----------|----------|----------|---------------|
