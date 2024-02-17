@@ -271,7 +271,9 @@ As seen in the table above, the intercept is 1.06, indicating the (expected) val
 | 3   |   0.92    |  51  | 100    |      3.76  |  -2.84
 | 4   |   0.65    |  64  |  50    |      3.00  |  -2.35
 | 5   |   2.08    | 208  |  80    |      5.79  |  -3.71
-| ... | ...       | ...  | ...    | ...        | ...        
+| ... | ...       | ...  | ...    | ...        | ...  
+
+Based on the output of the regression analysis applied to the individual data points, we can see that in practical application the model significantly overestimates the completion time for some of the observations. Again, this may be due to the quality of the original data, but there may be additional features that can help to improve the accuracy of this model.
 
 #### Correlation matrix
 
