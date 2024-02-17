@@ -29,18 +29,18 @@ As the project develops, it would be interesting to view the relations between u
 ## Operationalization of the research objectives
 <!-- Describe the data that will be used and how the questions will be answered on the basis of this data. The data analysis itself is not yet described here. So do tell ‘Data file [X] comes from [Y] and can answer the posed questions because [Z]’, but do not yet describe the data itself -->
 
-The NSALAB Learn platform stores all information in a NoSQL database (MongoDB) in the form of JSON collections. The raw data used for this research is essentially a dump from MongoDB database instances for **production** and **development** environments. Two collections are used from each database, which are:
+The NSALAB Learn platform stores all information in a NoSQL database (MongoDB) in the form of JSON collections. The raw data used for this research is a dump from MongoDB database instances for **production** and **development** environments. Two collections are used from each database, which are:
 
 - **materials** - a collection of study actual materials, such as:
-  - *lectures* - theoretical materials on certain topic 
-  - *labs* - practical assignments on certain topic where user have mechanics to deploy a lab environment in public cloud, guidelines to accomplish lab assignment and assessment engine to automatically grade the lab
-  - *tests* - short quizes on certain topics
-  - *courses* - collection of lectures, labs and tests grouped together 
-  - *test-exams* - exams on certain course
+  - *lectures* - theoretical materials on a certain topic 
+  - *labs* - practical assignments on certain topics where the user has mechanics to deploy a lab environment in the public cloud, including guidelines to accomplish lab assignments and an assessment engine to automatically grade the lab
+  - *Tests* - short quizes on certain topics
+  - *Courses* - collection of lectures, labs and tests grouped together 
+  - *Test-exams* - exams on certain courses
   - *learning paths* - collection of courses grouped together
-- **user_materials** - instances of assignment of a given material to a given user (e.g. when user opens a lecture a user material assignment created in database), with timestamps when material was assigned (opened) and submitted (finished) as well as completion scores if any.
+- **user_materials** - instances of an assignment of a given material to a given user (e.g. when user opens a lecture, a user material assignment is created in the database), with timestamps when material was assigned (opened) and submitted (finished) as well as the completion scores if any.
 
-*Note: The material types considered are only lectures, labs and tests as the estimated completion time of these other types is based on these calculations.*
+*Note: The material types considered are only lectures, labs and Tests as the estimated completion time of these other types is based on these calculations.*
 
 Therefore, the observation unit we are interested in is a user-material instance extended by metadata associated with a given material.
 
@@ -63,11 +63,11 @@ For simplicity, the pre-processing is done using the following scripts written i
 
 ### Extension of metadata
 
-A typical study material of each type is essentially a text, which may be supported by videos or illustrations. So we want to extract the total duration of videos, the number of images and count the number of words for each material. As the source text is in Markdown format and all assets are embedded in the source text, we also need to remove all links to previously counted assets and non-alpha-numeric characters to make the word count more accurate.
+The typical study material of each type is essentially a text, which may be supported by videos or illustrations. So we want to extract the total duration of videos, the number of images and count the number of words for each material. As the source text is in Markdown format and all assets are embedded in the source text, we also need to remove all links to previously counted assets and non-alpha-numeric characters to make the word count more accurate.
 
 ### Convertion to tabular data
 
-Since raw JSON data contains many data (e.g. material sources, deployment logs, etc.) which is not relevant for further analysis the purpose of the convertion script is to whitelist only relevant features for both types of files and save these collections as CSV files.
+Since raw JSON data contains a lot of data (e.g. material sources, deployment logs, etc.) which is not relevant for further analysis, the purpose of the conversion script is to whitelist only relevant features for both types of files and save these collections as CSV.
 
 
 **Table 1: Dataset files**
