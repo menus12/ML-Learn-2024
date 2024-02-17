@@ -164,7 +164,7 @@ A tibble: 4 × 7
 | pics          | 0.146    | 0.116     | 1.26      | 0.209   | -0.083   | 0.375    |
 | video_minutes | 0.473    | 0.256     | 1.84      | 0.068   | -0.035   | 0.981    |
 
-As seen in the table above, the intercept is 4.60, indidcating the expected value of the dependent variable (in this case Time Difference) when all independant variables are zero. For the Words, Pics, Video_minutes variables, these indicate the change in the dependent variable for a one-unit change in each independent variable, holding other variables constant. For instance, for 'video_minutes', the estimate is 0.473, suggesting that for each additional unit increase in 'video_minutes', the Time Difference variable increases by 0.473 units on average.
+As seen in the table above, the intercept is 4.60, indicating the (expected) value of the dependent variable (in this case Time Difference) when all independant variables are zero. For the Words, Pics, Video_minutes variables, these indicate the change in the dependent variable for a one-unit change in each independent variable, and where other variables will be constant. For 'video_minutes', the estimate is 0.473 which means that for each additional unit increase in 'video_minutes', the Time Difference variable increases on average by 0.473 units.
 
 get_regression_points(lectures_model)
 
