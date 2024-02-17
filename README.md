@@ -152,7 +152,7 @@ After cleaning the dataframes, the use of linear models has been applied to the 
 
 ### Analyzing completion time for lectures
 
-The visuals of these models is in the Appendix 1. Figure 5 through 7. The results of the regression model where the 3 variables have been included for the Lectures, is below:
+The visuals of these models is in the Appendix 2. The results of the regression model where the 3 variables have been included for the Lectures, is below:
 
 lectures_model <- lm(time_diff ~ words + pics + video_minutes, data = lectures)
 
@@ -202,53 +202,52 @@ In the output above, this correlation matrix mixes the variables and each cell r
 
 ### Analyzing completion time for labs
 
-The visuals of these models is in the Appendix 1. Figure 5 through 7. The results of the regression model where the 3 variables have been included for the Lectures, is below:
+The visuals of these models is in the Appendix 3. The results of the regression model where the 3 variables have been included for the Lectures, is below:
 
-lectures_model <- lm(time_diff ~ words + pics + video_minutes, data = lectures)
+labs_model <- lm(time_diff ~ words + pics + video_minutes, data = labs)
 
-get_regression_table(lectures_model)
+get_regression_table(labs_model)
 
 A tibble: 4 × 7
-| term          | estimate | std_error | statistic | p_value | lower_ci | upper_ci |
-|---------------|----------|-----------|-----------|---------|----------|----------|
-| intercept     | 4.60     | 0.811     | 5.67      | 0       | 2.99     | 6.20     |
-| words         | 0        | 0.001     | 0.566     | 0.572   | -0.001   | 0.002    |
-| pics          | 0.146    | 0.116     | 1.26      | 0.209   | -0.083   | 0.375    |
-| video_minutes | 0.473    | 0.256     | 1.84      | 0.068   | -0.035   | 0.981    |
+| term      | estimate | std_error | statistic | p_value | lower_ci | upper_ci |
+|-----------|----------|-----------|-----------|---------|----------|----------|
+| intercept | 168.     | 25.1      | 6.70      | 0       | 117.     | 219.     |
+| words     | -0.322   | 0.121     | -2.65     | 0.013   | -0.57    | -0.074   |
+| pics      | 17.4     | 9.97      | 1.74      | 0.092   | -3.04    | 37.7     |
+| score     | -0.241   | 0.222     | -1.09     | 0.286   | -0.696   | 0.213    |
 
-As seen in the table above, the intercept is 4.60, indicating the (expected) value of the dependent variable (in this case Time Difference) when all independant variables are zero. For the Words, Pics, Video_minutes variables, these indicate the change in the dependent variable for a one-unit change in each independent variable, and where other variables will be constant. For 'video_minutes', the estimate is 0.473 which means that for each additional unit increase in 'video_minutes', the Time Difference variable increases on average by 0.473 units.
+As seen in the table above, the intercept is 168, indicating the (expected) value of the dependent variable (in this case Time Difference) when all independant variables are zero. For the Words, Pics, Score variables, these indicate the change in the dependent variable for a one-unit change in each independent variable, and where other variables will be constant. For 'score', the estimate is -0.241 which means that for each additional unit increase in 'score', the Time Difference variable decreases on average by 0.241 units.
 
-get_regression_points(lectures_model)
+get_regression_points(labs_model)
 
 A tibble: 120 × 7
-| ID  | time_diff | words | pics | video_minutes | time_diff_hat | residual |
-|-----|-----------|-------|------|---------------|---------------|----------|
-| 1   | 4.17      | 885   | 0    | 0             | 4.96          | -0.792   |
-| 2   | 13.8      | 1954  | 0    | 0             | 5.40          | 8.42     |
-| 3   | 1.82      | 835   | 2    | 0             | 5.23          | -3.41    |
-| 4   | 3.3       | 286   | 0    | 0             | 4.72          | -1.42    |
-| 5   | 2.92      | 1209  | 0    | 0             | 5.10          | -2.17    |
-| 6   | 2.07      | 1058  | 3    | 0             | 5.47          | -3.40    |
-| 7   | 2.32      | 1470  | 2    | 0             | 5.49          | -3.17    |
-| 8   | 9.75      | 1171  | 11   | 0             | 6.68          | 3.06     |
-| 9   | 2.05      | 377   | 3    | 0             | 5.19          | -3.14    |
-| 10  | 4.2       | 1037  | 8    | 0             | 6.19          | -1.99    |
-| ... | ...       | ...   | ...  | ...           | ...           | ...      |
+| ID  | time_diff | words | pics | score | time_diff_hat | residual |
+|-----|-----------|-------|------|-------|---------------|----------|
+| 1   | 28.1      | 738   | 7    | 100   | 27.8          | 0.246    |
+| 2   | 82.2      | 742   | 7    | 50    | 38.6          | 43.6     |
+| 3   | 17.3      | 472   | 4    | 100   | 61.4          | -44.1    |
+| 4   | 58.9      | 472   | 4    | 100   | 61.4          | -2.44    |
+| 5   | 36.7      | 420   | 1    | 100   | 26.0          | 10.7     |
+| 6   | 38.6      | 420   | 1    | 100   | 26.0          | 12.6     |
+| 7   | 31.1      | 472   | 4    | 100   | 61.4          | -30.3    |
+| 8   | 18.0      | 420   | 1    | 100   | 26.0          | -7.98    |
+| 9   | 123.      | 226   | 1    | 100   | 88.4          | 34.1     |
+| 10  | 122.      | 226   | 1    | 100   | 88.4          | 34.0     |
 
-The output of the regression analysis is appied to the individual data points. Each row is an observation aka datapoint. As mentioned before, the time_diff is the dependant variable, whereas the words, pics, and video_minutes columns are the independent variables. The time_diff_hat contains the predicted values based on the regression model and the residual column shows the difference between the actual values and the predicted values. For example, as seen in the first row, the actual 'time_diff' is 4.17, and the predicted 'time_diff_hat' is 4.96. The difference between these two values, which is the residual, is -0.792. This means that the model, for this observation/row, shows the (underpredicted) time difference by 0.792 units.
+The output of the regression analysis is appied to the individual data points. Each row is an observation aka datapoint. The time_diff is the dependant variable, whereas the words, pics, and score columns are the independent variables. The time_diff_hat contains the predicted values based on the regression model and the residual column shows the difference between the actual values and the predicted values. As seen in the first row, the actual 'time_diff' is 28.1, and the predicted 'time_diff_hat' is 27.8. The difference between these two values, which is the residual, is 0.246. This means that the model, for this observation/row, shows the (overpredicted) time difference by 0.246 units.
 
 The correlation between these variables is calculated as follows:
 
-lectures %>% select(time_diff, words, pics, video_minutes) %>% cor()
+labs %>% select(time_diff, words, pics, score) %>% cor()
 
-|              | time_diff | words    | pics     | video_minutes |
-|--------------|-----------|----------|----------|---------------|
-| time_diff    | 1.0000000 | 0.1284185| 0.2142630| 0.22353759    |
-| words        | 0.1284185 | 1.0000000| 0.4302708| 0.08805087    |
-| pics         | 0.2142630 | 0.4302708| 1.0000000| 0.33110331    |
-| video_minutes| 0.2235376 | 0.0880509| 0.3311033| 1.00000000    |
+|         | time_diff | words      | pics       | score      |
+|---------|-----------|------------|------------|------------|
+| time_diff | 1.0000000 | -0.5502159 | -0.4375514 | -0.3592358 |
+| words    | -0.5502159 | 1.0000000  | 0.9529337  | 0.2866705  |
+| pics     | -0.4375514 | 0.9529337  | 1.0000000  | 0.2139325  |
+| score    | -0.3592358 | 0.2866705  | 0.2139325  | 1.0000000  |
 
-In the output above, this correlation matrix mixes the variables and each cell represents the correlection coefficient between two variables. For example, the correlation coefficient between 'words' and 'pics' is 0.4302708. This relationship can be categorized as a medium positive correlation between the number of words and pictures. So if the words are increased, the more pictures are included as well.
+In the output above, this correlation matrix mixes the variables and each cell represents the correlection coefficient between two variables. For example, the correlation coefficient between 'score' and 'pics' is 0.2139325. This relationship can be categorized as a (low) positive linear relationship between the score and pictures. So if the pictures are increased, the score is increased as well, the relationship is weak though.
 
 
 ### Model applications
