@@ -18,9 +18,10 @@ February 2024
 ## Table of contents
 
 ## Introduction
-Since 2017 the Network Systems Administration Laboratory (NSALAB) has been creating conditions for preparing young people to participate in international professional ICT skills competitions according to WorldSkills International standards. Starting 2020 NSALAB team decided to develop own linclusive digital environment for advanced training in the field of modern information technology (NSALAB Learn) to facilitate ICT training for the national team as well as for broader VET audience.
+Since 2017 the Network Systems Administration Laboratory (NSALAB) has been creating conditions for preparing young people to participate in international professional ICT skills competitions according to WorldSkills International standards. Starting 2020 the NSALAB team decided to develop its own inclusive digital environment for advanced training in the field of modern information technology (NSALAB Learn) to facilitate ICT training for the national team as well as for a broader VET audience.
 
 One of the issues faced in the development of the platform is the 'cold start' estimation of how long it might take to complete the developed learning pathways in order to better plan and schedule training activities. As the project develops, and considering the accumulation of real data, it would be interesting to look at the relationships between learning material characteristics and actual completion times.
+
 
 ## Operationalization of the research objectives
 <!-- Describe the data that will be used and how the questions will be answered on the basis of this data. The data analysis itself is not yet described here. So do tell ‘Data file [X] comes from [Y] and can answer the posed questions because [Z]’, but do not yet describe the data itself -->
