@@ -246,6 +246,8 @@ $\hat{y}$ = $b_{0}$ + $b_{words}$ * $words$ + $b_{pics}$ * $pics$ + $b_{score}$ 
 
 $\hat{y}$ = $168$ - $0.322$ * $words$ + $17.4$ * $pics$ - $0.241$ * $score$.
 
+*Note: Considering that materials collection doesn't have a score feature, in this case score is a constant and equals to 100.*
+
 ### Correlation in completion time for tests
 
 The visuals of these models are in the Appendix 4. The results of the regression model where the 3 variables have been included for the Tests, is below:
@@ -291,20 +293,61 @@ $\hat{y}$ = $b_{0}$ + $b_{words}$ * $words$ + $b_{score}$ * $score$
 
 $\hat{y}$ = $1.06$ - $0.015$ * $words$ + $0.019$ * $score$.
 
-### Model applications
+*Note: Considering that materials collection doesn't have a score feature, in this case score is a constant and equals to 100.*
+
+### Model application and evaluation
 <!-- R code is correct and well documented-->
 
-R script separate
+The resulting models were applied to the original material sets separately for each type which were part of model training.
 
-### Model evaluation & improvements
-<!-- Evaluation and improvement extensively done and elaborated-->
+| materialType | video_minutes | pics | words  | material_id | pred_duration
+|---------|-----------|------------|------------|------------|------------|
+|lecture  |  0 |  0 |   87 | 63ed3aaeafabb41dedbb016c |      4.634489
+|lecture  |  0 |  5 | 1986 | 6389343da9c50f31832137c8 |      6.144015
+|lecture  |  0 |  1 |  501 | 63612ed495396db4fb45daed |      4.950434
+|lecture  |  0 |  3 |  225 | 635c45d36c82900a3b9c9976 |      5.129094
+|lecture  |  6 |  1 |  449 | 635c444b6c82900a3b9c95d7 |      7.765242
+|lecture  |  7 |  8 | 1369 | 635c6102e1ce6a91a1da89fc |      9.637515
+|lecture  | 17 |  3 |  543 | 635c45106c82900a3b9c9705 |     13.295419
+|lecture  |  0 | 13 | 1966 | 635c60afe1ce6a91a1da86dd |      7.303676
+|lecture  |  0 |  8 | 3320 | 635c5f1be1ce6a91a1da7d4e |      7.129621
+|lecture  |  0 |  1 |   57 | 6389345ea9c50f318321386e |      4.768156
+|...           |     ...| ...|  ... | ...                       |   ...
 
-Not sure if we need this one?
+The regression model for lecture completion time looks more plausible, however in the first row we see that there are 17 minutes of video in the lecture, but the completion time is 13 minutes. Hence, this model needs improvement. 
 
-### Model comparison
-<!-- Comparison (Ensemble) properly done and elaborated -->
+|materialType | video_minutes | pics | words |   material_id | score | pred_duration
+|---------|-----------|------------|------------|------------|------------|------------|
+|lab      |0  | 0 |  106 | 635c5e62e1ce6a91a1da7999  | 100  |  109.703698
+|lab      |0  | 0 |  153 | 63893325a9c50f318321367f  | 100  |   94.581980
+|lab      |0  | 0 |  430 | 63ed3aa5afabb41dedbb0168  | 100  |    5.460365
+|lab      |0  | 0 |  751 | 63ed34ab05c5bbdb548046fb  | 100  |  -97.817752
+|lab      |0  | 0 | 1692 | 635c5714d037d191e139407d  | 100  | -400.573853
+|lab      |0  | 0 |   16 | 635c452a6c82900a3b9c9709  | 100  |  138.660180
+|lab      |0  | 0 |  432 | 63ed345f05c5bbdb5480468c  | 100  |    4.816888
+|lab      |0  | 1 | 1049 | 635c4ef53148097457501708  | 100  | -176.343155
+|lab      |0  | 1 |  741 | 63612e9c95396db4fb45da3d  | 100  |  -77.247640
+|lab      |0  | 0 |  366 | 63612eae95396db4fb45da5f  | 100  |   26.051641
+|... |  ...  | ... | ... | ...   | ...  | ...
 
-Not sure if we need this one?
+As expected, the regression model for lab completion time has no practical application since there are occasions of negative completion duration.
+
+|materialType | video_minutes | pics | words |   material_id | score | pred_duration
+|---------|-----------|------------|------------|------------|------------|------------|
+|test     |0  | 0 | 463 | 635c60c6e1ce6a91a1da8772 | 100 |   10.099378
+|test     |0  | 0 | 208 | 63612ed795396db4fb45db1e | 100 |    6.174245
+|test     |0  | 0 |  85 | 635c44f96c82900a3b9c96b4 | 100 |    4.280946
+|test     |0  | 0 | 166 | 635c4f533148097457501863 | 100 |    5.527753
+|test     |0  | 0 | 358 | 635c56ebd037d191e1394071 | 100 |    8.483147
+|test     |0  | 0 | 626 | 635c5728d037d191e13940cb | 100 |   12.608385
+|test     |0  | 0 |  38 | 635c6079e1ce6a91a1da8637 | 100 |    3.557490
+|test     |0  | 0 |  88 | 63612eb095396db4fb45da76 | 100 |    4.327124
+|test     |0  | 0 |  35 | 635c4fca3148097457501cc7 | 100 |    3.511312
+|test     |0  | 0 |  92 | 635c507231480974575020f0 | 100 |    4.388695
+|... |  ...  | ... | ... | ...   | ...  | ...
+
+
+The predictions for test completion times look legitimate, however slightly overestimated, which also indicates that the model requires improvement.
 
 ## Conclusions and recommendations
 <!-- including recommendations for further research -->
