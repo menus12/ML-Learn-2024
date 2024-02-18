@@ -22,8 +22,8 @@ options(scipen = 999)
 #======================================================================
 
 # Loading csv files 
-dev_materials <- read.csv('Datafiles/dev_materials.csv')
-dev_user_materials <- read.csv('Datafiles/dev_user_materials.csv')
+dev_materials <- read.csv('pre_processed_csv/dev_materials.csv')
+dev_user_materials <- read.csv('pre_processed_csv/dev_user_materials.csv')
 
 # Renaming and reordering some columns
 names(dev_materials)[5] <- "material_id"
@@ -47,8 +47,8 @@ dev_user_materials$submitted_at <- as.POSIXct(dev_user_materials$submitted_at,
 #======================================================================
 
 # Loading csv files 
-prod_materials <- read.csv('Datafiles/prod_materials.csv')
-prod_user_materials <- read.csv('Datafiles/prod_user_materials.csv')
+prod_materials <- read.csv('pre_processed_csv/prod_materials.csv')
+prod_user_materials <- read.csv('pre_processed_csv/prod_user_materials.csv')
 
 # Renaming and reordering some columns
 names(prod_materials)[5] <- "material_id"
