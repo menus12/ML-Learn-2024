@@ -354,15 +354,15 @@ test_tests$pred_duration <- predict(tests_model, test_tests)
 sample_n(test_lectures, 10)
 
 # Visualizing 3D model based on all 3 variables colored with predicted duration
-marker <- list(color = ~pred_duration, colorscale = c('#FFE1A1', '#683531'), 
-               showscale = TRUE)
 plot_ly(test_lectures, x = ~words, y = ~pics, z = ~video_minutes, 
-        type="scatter3d", mode="markers",  marker = marker) %>%
+        type="scatter3d", mode="markers",  marker = list(size=5, opacity=.9,  
+        color=~pred_duration, colorscale = list(c(0,1), c("blue", "yellow")), 
+        colorbar=list(title='Completion time'))) %>%
   add_markers() %>%
-  layout(
-    scene = list(xaxis = list(title = 'Number of words'),
-                 yaxis = list(title = 'Number of pictures'),
-                 zaxis = list(title = 'Video Length')))
+  layout(showlegend = FALSE,
+         scene = list(xaxis = list(title = 'Number of words'),
+                      yaxis = list(title = 'Number of pictures'),
+                      zaxis = list(title = 'Video Length')))
 
 # Check spread in predicted completion time 
 boxplot(test_lectures$pred_duration,
@@ -384,3 +384,4 @@ sample_n(test_tests, 10)
 boxplot(test_tests$pred_duration,
         xlab = "Tests",
         ylab = "Predicted completion time (mins)")
+
