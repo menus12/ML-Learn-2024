@@ -1,14 +1,16 @@
-## Title
+# Predicting Completion Time in E-Learning
 <!-- Optional, the preface is not about the subject -->
-**Predicting Completion Time in E-Learning**
+![](./images/title.png) 
 
-*Analyzing the Impact of Content Characteristics on Learner Engagement within the NSALAB Learn Platform*
+## *Analyzing the Impact of Content Characteristics on Learner Engagement within the NSALAB Learn Platform*
 
 By  Aleksandr Gorbachev & David Langeveld  
 
 
 The Hague University of Applied Sciences PRO
+
 Master of Business Administration
+
 February 2024
 
 
