@@ -320,7 +320,7 @@ The equation of the regression plane that gives us fitted values of test complet
 
 $\hat{y}$ = $b_{0}$ + $b_{words}$ * $words$ + $b_{score}$ * $score$
 
-$\hat{y}$ = $1.06$ - $0.015$ * $words$ + $0.019$ * $score$.
+$\hat{y}$ = $1.06$ + $0.015$ * $words$ + $0.019$ * $score$.
 
 *Note: Considering that materials collection doesn't have a score feature, in this case score is a constant and equals to 100.*
 
@@ -390,12 +390,10 @@ Recommendations for further research include extracting additional features from
 
 In the long run, it is also important to include learner feedback and engagement metrics to better tailor educational content to individual learning paces and preferences.
 
-## Appendix
+## Appendix 1: Grouped
 
-Appendix 1: Grouped
+## Appendix 2: Lectures
 
-Appendix 2: Lectures
+## Appendix 3: Labs
 
-Appendix 3: Labs
-
-Appendix 4: Tests
+## Appendix 4: Tests
