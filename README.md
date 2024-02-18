@@ -64,7 +64,7 @@ The NSALAB Learn platform stores all information in a NoSQL database (MongoDB) i
   - *learning paths* - collection of courses grouped together
 - **user_materials** - instances of an assignment of a given material to a given user (e.g. when user opens a lecture, a user material assignment is created in the database), with timestamps when material was assigned (opened) and submitted (finished) as well as the completion scores if any.
 
-*Note: The material types considered are only lectures, labs and Tests as the estimated completion time of these other types is based on these calculations.*
+*Note: The material types considered are only lectures, labs and tests as the estimated completion time of other types is based on these calculations.*
 
 Therefore, the observation unit we are interested in is a user-material instance extended by metadata associated with a given material.
 
@@ -186,7 +186,7 @@ The visuals of these models are in the Appendix 2. The results of the regression
 
 The estimate for the intercept is 4.60 with a standard error of 0.811. The intercept represents the expected value of completion time when all other variables are zero. This means that the model predicts a baseline completion time of 4.60 minutes when there are no words, illustrations, or video minutes included.
 
-For the **Words**, **Pics**, **Video_minutes** variables, these indicate the change in the dependent variable for a one-unit change in each independent variable, and where other variables will be constant. For 'video_minutes', the estimate is 0.473 which means that for each additional unit increase in 'video_minutes', the Time Difference variable increases on average by 0.473 units. Note that the coefficient for words is not 0 but 0.0004105351.
+For the `words`, `pics`, `video_minutes` variables, these indicate the change in the dependent variable for a one-unit change in each independent variable, and where other variables will be constant. For `video_minutes`, the estimate is 0.473 which means that for each additional unit increase in `video_minutes`, the completion time variable increases on average by 0.473 units. Note that the coefficient for words is not 0 but 0.0004105351.
 
 #### Regression points
 
@@ -200,7 +200,7 @@ For the **Words**, **Pics**, **Video_minutes** variables, these indicate the cha
 | 5   | 2.92      | 1209  | 0    | 0             | 5.10          | -2.17    |
 | ... | ...       | ...   | ...  | ...           | ...           | ...      |
 
-The output of the regression analysis is applied to the individual data points. Each row is an observation aka datapoint. As mentioned before, the time_diff is the dependent variable, whereas the words, pics, and video_minutes columns are the independent variables. The time_diff_hat contains the predicted values based on the regression model and the residual column shows the difference between the actual values and the predicted values. For example, as seen in the first row, the actual 'time_diff' is 4.17, and the predicted 'time_diff_hat' is 4.96. The difference between these two values, which is the residual, is -0.792. This means that the model, for this observation/row, shows the (underpredicted) time difference by 0.792 units.
+The output of the regression analysis is applied to the individual data points. Each row is an observation aka datapoint. As mentioned before, the time_diff is the dependent variable, whereas the `words`, `pics`, and `video_minutes` columns are the independent variables. The `time_diff_hat` contains the predicted values based on the regression model and the residual column shows the difference between the actual values and the predicted values. For example, as seen in the first row, the actual `time_diff` is 4.17, and the predicted `time_diff_hat` is 4.96. The difference between these two values, which is the residual, is -0.792. This means that the model, for this observation/row, shows the (underpredicted) time difference by 0.792 units.
 
 #### Correlation matrix
 
@@ -212,7 +212,7 @@ The output of the regression analysis is applied to the individual data points. 
 | pics         | 0.2142630 | 0.4302708| 1.0000000| 0.33110331    |
 | video_minutes| 0.2235376 | 0.0880509| 0.3311033| 1.00000000    |
 
-In the output above, this correlation matrix mixes the variables and each cell represents the correlation coefficient between two variables. For example, the correlation coefficient between 'words' and 'pics' is 0.4302708. This relationship can be categorized as a medium positive correlation between the number of words and pictures. So if the words are increased, the more pictures are included as well.
+In the output above, this correlation matrix mixes the variables and each cell represents the correlation coefficient between two variables. For example, the correlation coefficient between `time_diff` and `words` is 0.1284185. This relationship can be categorized as a medium positive correlation between the completion time and number of `words`. So,  if the `time_diff` are increased, the more `words` in material text.
 
 Correlation values for completion time are straightforward - the more words, illustrations and videos we have in a lecture - the more time it takes to finish it.
 
@@ -238,7 +238,7 @@ The visuals of these models are in the Appendix 3. The results of the regression
 | pics      | 17.4     | 9.97      | 1.74      | 0.092   | -3.04    | 37.7     |
 | score     | -0.241   | 0.222     | -1.09     | 0.286   | -0.696   | 0.213    |
 
-As seen in the table above, the intercept is 168, indicating the (expected) value of the dependent variable (completion time) when all independent variables are zero. For the Words, Pics, Score variables, these indicate the change in the dependent variable for a one-unit change in each independent variable, and where other variables will be constant. For 'score', the estimate is -0.241 which means that for each additional unit increase in 'score', the completion time variable decreases on average by 0.241 units.
+As seen in the table above, the intercept is 168, indicating the (expected) value of the dependent variable (completion time) when all independent variables are zero. For the `words`, `pics`, `score` variables, these indicate the change in the dependent variable for a one-unit change in each independent variable, and where other variables will be constant. For `score`, the estimate is -0.241 which means that for each additional unit increase in `score`, the completion time variable decreases on average by 0.241 units.
 
 #### Regression points
 
@@ -289,7 +289,7 @@ The visuals of these models are in the Appendix 4. The results of the regression
 |words      | 0.015    | 0.003     | 5.87  | 0      |  0.01   |  0.021
 |score      | 0.019    | 0.006     | 2.97  | 0.003  |  0.006  |  0.032
 
-As seen in the table above, the intercept is 1.06, indicating the (expected) value of the dependent variable (completion time) when all independent variables are zero. For the Words and Score variables, these indicate the change in the dependent variable for a one-unit change in each independent variable, and where other variables will be constant. For instance for 'score', the estimate is 0.019 which means that for each additional unit increase in 'score', the completion time variable increased on average by 0.019 units.
+As seen in the table above, the intercept is 1.06, indicating the (expected) value of the dependent variable (completion time) when all independent variables are zero. For the `words` and `score` variables, these indicate the change in the dependent variable for a one-unit change in each independent variable, and where other variables will be constant. For instance for `score`, the estimate is 0.019 which means that for each additional unit increase in `score`, the completion time variable increased on average by 0.019 units.
 
 #### Regression points
 
