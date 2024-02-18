@@ -401,8 +401,65 @@ In the long run, it is also important to include learner feedback and engagement
 
 ## Appendix 1: Boxplots for completion time
 
+![Figure 1.1. Spread in completion time by material type](./images/Figure-1.1.png)
+*Figure 1.1. Spread in completion time by material type*
+
+| |  |  | 
+|---------|-----------|------------|
+|![](./images/Figure-1.2-1.png)   |![](./images/Figure-1.2-2.png)   | ![](./images/Figure-1.2-3.png)   | 
+
+*Figure 1.2. Spread in completion time after removing extreme outlines*
+
 ## Appendix 2: Visualizations of linear models for lectures
+
+![Figure 2.1. Linear model for lectures completion time, depending on words count](./images/Figure-2.1.png)
+*Figure 2.1. Linear model for lectures completion time, depending on words count*
+
+![Figure 2.2. Linear model for lectures completion time, depending on illustrations count](./images/Figure-2.2.png)
+*Figure 2.2. Linear model for lectures completion time, depending on illustrations count*
+
+![Figure 2.3. Linear model for lectures completion time, depending on videos duration](./images/Figure-2.3.png)
+*Figure 2.3. Linear model for lectures completion time, depending on videos duration*
+
+![Figure 2.4. 3D heatmap for lectures completion time, considering on all 3 features](./images/Figure-2.4.png)
+*Figure 2.4. 3D heatmap for lectures completion time, considering on all 3 features*
 
 ## Appendix 3: Visualizations of linear models for labs
 
-## Appendix 4:  Visualizations of linear models for tests
+![Figure 3.1. Linear model for labs completion time, depending on words count](./images/Figure-3.1.png)
+*Figure 3.1. Linear model for labs completion time, depending on words count*
+
+![Figure 3.2. Linear model for labs completion time, depending on illustrations count](./images/Figure-3.2.png)
+*Figure 3.2. Linear model for labs completion time, depending on illustrations count*
+
+![Figure 3.3. Linear model for labs completion time, depending on score](./images/Figure-3.3.png)
+*Figure 3.3. Linear model for labs completion time, depending on score*
+
+![Figure 3.4. 3D heatmap for labs completion time, considering on all 3 features](./images/Figure-3.4.png)
+*Figure 3.4. 3D heatmap for labs completion time, considering on all 3 features*
+
+
+## Appendix 4: Visualizations of linear models for tests
+
+![Figure 4.1. Linear model for tests completion time, depending on words count](./images/Figure-4.1.png)
+*Figure 4.1. Linear model for tests completion time, depending on words count*
+
+![Figure 4.2. Linear model for tests completion time, depending on score](./images/Figure-4.2.png)
+*Figure 4.2. Linear model for tests completion time, depending on score*
+
+![Figure 4.3. Linear model for tests completion time, depending on words count, score colored](./images/Figure-4.3.png)
+*Figure 4.3. Linear model for tests completion time, depending on words count, score colored*
+
+![Figure 4.4. 3D heatmap for tests completion time, considering words count and score](./images/Figure-4.4.png)
+*Figure 4.4. 3D heatmap for tests completion time, considering words count and score*
+
+## Appendix 5: Visualizations of model application
+
+![Figure 5.1. 3D heatmap for predicted completion time for lectures considering 3 features](./images/Figure-5.1.png)
+*Figure 5.1. 3D heatmap for predicted completion time for lectures considering 3 features*
+
+| |  |  | 
+|---------|-----------|------------|
+|![](./images/Figure-5.2-1.png)   |![](./images/Figure-5.2-2.png)   | ![](./images/Figure-5.2-3.png)   | 
+
+*Figure 5.2. Spread in predicted completion time*
