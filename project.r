@@ -225,7 +225,6 @@ plot_ly(lectures, x = ~words, y = ~pics, z = ~video_minutes,
                  yaxis = list(title = 'Number of pictures'),
                  zaxis = list(title = 'Video Length')))
 
-
 #======================================================================
 # Analyzing completion time for labs
 #======================================================================
@@ -248,6 +247,7 @@ ggplot(labs, aes(x = score, y = time_diff)) +
   labs(x = "Score", y = "Completion time (mins)") +
   geom_smooth(method = "lm", se = FALSE)
 
+# Making a linear model, regression table and correlation matrix
 labs_model <- lm(time_diff ~ words + pics + score, data = labs)
 get_regression_table(labs_model)
 get_regression_points(labs_model)
@@ -284,6 +284,7 @@ ggplot(tests, aes(x = score, y = time_diff)) +
   labs(x = "Score", y = "Completion time (mins)") +
   geom_smooth(method = "lm", se = FALSE)
 
+# Making a linear model, regression table and correlation matrix
 tests_model <- lm(time_diff ~ words + score, data = tests)
 get_regression_table(tests_model)
 get_regression_points(tests_model)
@@ -292,7 +293,8 @@ tests %>% select(time_diff, words, score) %>% cor()
 # Visualizing 3D model based on 2 variables colored + completion time
 plot_ly(tests, x = ~words, y = ~score, z = ~time_diff, 
         type="scatter3d", mode="markers", marker = list(size=5, opacity=.9,  
-                                                        color=~time_diff, colorscale = list(c(0,1), c("blue", "yellow")), colorbar=list(title='Completion time'))) %>%
+        color=~time_diff, colorscale = list(c(0,1), c("blue", "yellow")), 
+        colorbar=list(title='Completion time'))) %>%
   add_markers() %>%
   layout(
     scene = list(xaxis = list(title = 'Number of words'),
@@ -306,3 +308,76 @@ ggplot(tests, aes(x = words, y = time_diff , color = score)) +
   labs(x = "Number of words", y = "Completion time (mins)", color = "Score") +
   scale_color_gradient(low="blue", high="yellow") +
   geom_smooth(method = "lm", se = FALSE)
+
+#======================================================================
+# Model application and evaluation
+#======================================================================
+#======================================================================
+# Filtering materials which were not part of the model training set
+#======================================================================
+# Filtering lectures from combined materials
+test_lectures <- combined_materials %>% 
+ filter(materialType == "lecture" &!(material_id %in% com_filtered$material_id))
+
+# Filtering labs from combined materials
+test_labs <- combined_materials %>% 
+  filter(materialType == "lab" & !(material_id %in% com_filtered$material_id))
+# Adding constant highest score 
+test_labs$score <- 100
+
+# Filtering tests from combined materials
+test_tests <- combined_materials %>% 
+  filter(materialType == "test" & !(material_id %in% com_filtered$material_id))
+# Adding constant highest score 
+test_tests$score <- 100
+
+#======================================================================
+# Adding predicted duration using previously trained models
+#======================================================================
+# Predicting completion time for lectures
+test_lectures$pred_duration <- predict(lectures_model, test_lectures)
+
+# Predicting completion time for lectures
+test_labs$pred_duration <- predict(labs_model, test_labs)
+
+# Predicting completion time for lectures
+test_tests$pred_duration <- predict(tests_model, test_tests)
+
+#======================================================================
+# Evaluating results
+#======================================================================
+
+# Checking random sample for lectures
+sample_n(test_lectures, 10)
+
+# Visualizing 3D model based on all 3 variables colored with predicted duration
+marker <- list(color = ~pred_duration, colorscale = c('#FFE1A1', '#683531'), 
+               showscale = TRUE)
+plot_ly(test_lectures, x = ~words, y = ~pics, z = ~video_minutes, 
+        type="scatter3d", mode="markers",  marker = marker) %>%
+  add_markers() %>%
+  layout(
+    scene = list(xaxis = list(title = 'Number of words'),
+                 yaxis = list(title = 'Number of pictures'),
+                 zaxis = list(title = 'Video Length')))
+
+# Check spread in predicted completion time 
+boxplot(test_lectures$pred_duration,
+        xlab = "Lectures",
+        ylab = "Predicted completion time (mins)")
+
+# Checking random sample for labs
+sample_n(test_labs, 10)
+
+# Check spread in predicted completion time 
+boxplot(test_labs$pred_duration,
+        xlab = "Labs",
+        ylab = "Predicted completion time (mins)")
+
+# Checking random sample for tests
+sample_n(test_tests, 10)
+
+# Check spread in predicted completion time 
+boxplot(test_tests$pred_duration,
+        xlab = "Tests",
+        ylab = "Predicted completion time (mins)")
