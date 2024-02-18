@@ -19,6 +19,38 @@ This research paper explores the estimation of study materials' completion time 
 
 ## Table of contents
 
+<!-- TOC start (generated with https://github.com/derlin/bitdowntoc) -->
+
+- [Abstract](#abstract)
+- [Table of contents](#table-of-contents)
+- [Introduction](#introduction)
+- [Operationalization of the research objectives](#operationalization-of-the-research-objectives)
+- [JSON pre-processing](#json-pre-processing)
+   * [Extension of metadata](#extension-of-metadata)
+   * [Conversion to tabular data](#conversion-to-tabular-data)
+- [Preliminary analysis, cleaning and tuning](#preliminary-analysis-cleaning-and-tuning)
+- [Machine learning models](#machine-learning-models)
+- [Results of the data analysis](#results-of-the-data-analysis)
+   * [Correlation in completion time for lectures](#correlation-in-completion-time-for-lectures)
+      + [Regression table](#regression-table)
+      + [Regression points](#regression-points)
+      + [Correlation matrix](#correlation-matrix)
+      + [Prediction equation](#prediction-equation)
+   * [Correlation in completion time for labs](#correlation-in-completion-time-for-labs)
+      + [Regression table](#regression-table-1)
+      + [Regression points](#regression-points-1)
+      + [Correlation matrix](#correlation-matrix-1)
+      + [Prediction equation](#prediction-equation-1)
+   * [Correlation in completion time for tests](#correlation-in-completion-time-for-tests)
+      + [Regression table](#regression-table-2)
+      + [Regression points](#regression-points-2)
+      + [Correlation matrix](#correlation-matrix-2)
+      + [Prediction equation](#prediction-equation-2)
+   * [Model application and evaluation](#model-application-and-evaluation)
+- [Conclusions and recommendations](#conclusions-and-recommendations)
+
+<!-- TOC end -->
+
 ## Introduction
 Since 2017 the Network Systems Administration Laboratory (NSALAB) has been creating conditions for preparing young people to participate in international professional ICT skills competitions according to WorldSkills International standards. Starting 2020 the NSALAB team decided to develop its own inclusive digital environment for advanced training in the field of modern information technology (NSALAB Learn) to facilitate ICT training for the national team as well as for a broader VET audience.
 
