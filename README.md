@@ -1,16 +1,16 @@
 ## Title
 <!-- Optional, the preface is not about the subject -->
-An analysis of study materials completion time in an inclusive digital environment for advanced training in the field of modern information technology
+**Predicting Completion Time in E-Learning**
+
+*Analyzing the Impact of Content Characteristics on Learner Engagement within the NSALAB Learn Platform*
 
 By  Aleksandr Gorbachev & David Langeveld  
 
 
-A Research Paper  
-Submitted to the lecturer of the subject ‘Machine Learning’  
-The Hague University of Applied Sciences PRO  
-Master of Business Administration  
-MBA Big Data Analytics  
+The Hague University of Applied Sciences PRO
+Master of Business Administration
 February 2024
+
 
 ## Abstract
 <!-- Contains the purpose of the research carried out, the research questions that are dealt with, the research method and the most important findings -->
@@ -86,13 +86,11 @@ The following steps will make sure to operationalize the data so that the formul
 
 Data pre-processing aims to enhance the existing dump of the materials collection with additional metadata (features) extracted from the text and to convert relevant information into tabular CSV data.
 
-For simplicity, the pre-processing is done using the following scripts written in Python and attached to the report:
-- extend_metadata.py
-- json_to_csv.py
+For simplicity, the pre-processing is done using the following scripts written in Python and attached to the report (*extend_metadata.py* and *json_to_csv.py*)
 
 ### Extension of metadata
 
-The typical study material of each type is essentially a text, which may be supported by videos or illustrations. So we want to extract the total duration of videos, the number of images and count the number of words for each material. As the source text is in Markdown format and all assets are embedded in the source text, we also need to remove all links to previously counted assets and non-alpha-numeric characters to make the word count more accurate.
+The typical study material of each type is essentially a text, which may be supported by videos or illustrations. So, we want to extract the total duration of videos, the number of images and count the number of words for each material. As the source text is in Markdown format and all assets are embedded in the source text, we also need to remove all links to previously counted assets and non-alpha-numeric characters to make the word count more accurate.
 
 ### Conversion to tabular data
 
@@ -128,7 +126,7 @@ score           |   User score of lab or test (if any)
 
 ## Preliminary analysis, cleaning and tuning
 
-Detailed steps for cleaning and analyzing the resulting dataset can be found in the R script attached to the report (project.r).
+Detailed steps for cleaning and analyzing the resulting dataset can be found in the R script attached to the report (*project.r*).
 
 It should be noted that the raw data, due to the nature of the application of the platform, has a lot of noisy observations.
 
@@ -142,9 +140,9 @@ Since the main outcome variable is the actual completion time (duration in minut
 
 After extending (left-joining) the combined materials dataframe to user materials, we also remove observations that do not contain text (meta-materials).
 
-Now we can observe that for the remaining relevant associations there is a huge spread in completion time (Appendix 1. Figure 1), so that there are observations where the completion time is over 200,000 minutes.
+Now we can observe that for the remaining relevant associations there is a huge spread in completion time (Appendix 1. Figure 1.1), so that there are observations where the completion time is over 200,000 minutes.
 
-However, before removing these extreme outliers, as we will treat each material type separately below, we first divide them into separate dataframes and then remove extreme outliers for each dataframe.
+However, before removing these extreme outliers (Appendix 1. Figure 1.2), as we will treat each material type separately below, we first divide them into separate data frames and then remove extreme outliers for each data frame.
 
 Additional assumptions are made for clearing:
  - Lectures with completion time <1 minute are considered skipped and removed.
@@ -183,6 +181,7 @@ The visuals of these models are in the Appendix 2. The results of the regression
 
 #### Regression table
 
+**Table 5. Regression table for lectures linear model**
 | term          | estimate | std_error | statistic | p_value | lower_ci | upper_ci |
 |---------------|----------|-----------|-----------|---------|----------|----------|
 | intercept     | 4.60     | 0.811     | 5.67      | 0       | 2.99     | 6.20     |
@@ -196,6 +195,7 @@ For the **Words**, **Pics**, **Video_minutes** variables, these indicate the cha
 
 #### Regression points
 
+**Table 6. Regression points for lectures linear model**
 | ID  | time_diff | words | pics | video_minutes | time_diff_hat | residual |
 |-----|-----------|-------|------|---------------|---------------|----------|
 | 1   | 4.17      | 885   | 0    | 0             | 4.96          | -0.792   |
@@ -209,6 +209,7 @@ The output of the regression analysis is applied to the individual data points. 
 
 #### Correlation matrix
 
+**Table 7. Correlation matrix for lectures linear model**
 |              | time_diff | words    | pics     | video_minutes |
 |--------------|-----------|----------|----------|---------------|
 | time_diff    | 1.0000000 | 0.1284185| 0.2142630| 0.22353759    |
@@ -234,6 +235,7 @@ The visuals of these models are in the Appendix 3. The results of the regression
 
 #### Regression table
 
+**Table 8. Regression table for labs linear model**
 | term      | estimate | std_error | statistic | p_value | lower_ci | upper_ci |
 |-----------|----------|-----------|-----------|---------|----------|----------|
 | intercept | 168.     | 25.1      | 6.70      | 0       | 117.     | 219.     |
@@ -245,6 +247,7 @@ As seen in the table above, the intercept is 168, indicating the (expected) valu
 
 #### Regression points
 
+**Table 9. Regression points for labs linear model**
 | ID  | time_diff | words | pics | score | time_diff_hat | residual |
 |-----|-----------|-------|------|-------|---------------|----------|
 | 1   | 28.1      | 738   | 7    | 100   | 27.8          | 0.246    |
@@ -258,6 +261,7 @@ Given the output of the regression analysis is applied to the individual data po
 
 #### Correlation matrix
 
+**Table 10. Correlation matrix for labs linear model**
 |         | time_diff | words      | pics       | score      |
 |---------|-----------|------------|------------|------------|
 | time_diff | 1.0000000 | -0.5502159 | -0.4375514 | -0.3592358 |
@@ -283,6 +287,7 @@ The visuals of these models are in the Appendix 4. The results of the regression
 
 #### Regression table
 
+**Table 11. Regression table for tests linear model**
 | term      | estimate | std_error | statistic | p_value | lower_ci | upper_ci |
 |-----------|----------|-----------|-----------|---------|----------|----------|
 |intercept  | 1.06     | 0.539     | 1.96  | 0.051  | -0.003  |  2.12 
@@ -293,6 +298,7 @@ As seen in the table above, the intercept is 1.06, indicating the (expected) val
 
 #### Regression points
 
+**Table 12. Regression points for tests linear model**
 | ID  | time_diff | words |score | time_diff_hat | residual |
 |-----|-----------|-------|------|---------------|----------|
 | 1   |   1.15    | 112  |  83    |      4.37  |  -3.22
@@ -306,6 +312,7 @@ Based on the output of the regression analysis applied to the individual data po
 
 #### Correlation matrix
 
+**Table 13. Correlation matrix for tests linear model**
 |         | time_diff | words      | score      |
 |---------|-----------|------------|------------|
 | time_diff | 1.0000000 | 0.33925881 | 0.19485197
@@ -327,8 +334,9 @@ $\hat{y}$ = $1.06$ + $0.015$ * $words$ + $0.019$ * $score$.
 ### Model application and evaluation
 <!-- R code is correct and well documented-->
 
-The resulting models were applied to the original material sets separately for each type which were part of model training.
+The resulting models were applied to the original material sets separately for each type which were part of model training. The visuals of these models are in the Appendix 5.
 
+**Table 14. Predicted completion time for lectures**
 | materialType | video_minutes | pics | words  | material_id | pred_duration
 |---------|-----------|------------|------------|------------|------------|
 |lecture  |  0 |  0 |   87 | 63ed3aaeafabb41dedbb016c |      4.634489
@@ -345,6 +353,7 @@ The resulting models were applied to the original material sets separately for e
 
 The regression model for lecture completion time looks more plausible, however in the first row we see that there are 17 minutes of video in the lecture, but the completion time is 13 minutes. Hence, this model needs improvement. 
 
+**Table 15. Predicted completion time for labs**
 |materialType | video_minutes | pics | words |   material_id | score | pred_duration
 |---------|-----------|------------|------------|------------|------------|------------|
 |lab      |0  | 0 |  106 | 635c5e62e1ce6a91a1da7999  | 100  |  109.703698
@@ -361,6 +370,7 @@ The regression model for lecture completion time looks more plausible, however i
 
 As expected, the regression model for lab completion time has no practical application since there are occasions of negative completion duration.
 
+**Table 16. Predicted completion time for tests**
 |materialType | video_minutes | pics | words |   material_id | score | pred_duration
 |---------|-----------|------------|------------|------------|------------|------------|
 |test     |0  | 0 | 463 | 635c60c6e1ce6a91a1da8772 | 100 |   10.099378
@@ -374,7 +384,6 @@ As expected, the regression model for lab completion time has no practical appli
 |test     |0  | 0 |  35 | 635c4fca3148097457501cc7 | 100 |    3.511312
 |test     |0  | 0 |  92 | 635c507231480974575020f0 | 100 |    4.388695
 |... |  ...  | ... | ... | ...   | ...  | ...
-
 
 The predictions for test completion times look legitimate, however slightly overestimated, which also indicates that the model requires improvement.
 
@@ -390,10 +399,10 @@ Recommendations for further research include extracting additional features from
 
 In the long run, it is also important to include learner feedback and engagement metrics to better tailor educational content to individual learning paces and preferences.
 
-## Appendix 1: Grouped
+## Appendix 1: Boxplots for completion time
 
-## Appendix 2: Lectures
+## Appendix 2: Visualizations of linear models for lectures
 
-## Appendix 3: Labs
+## Appendix 3: Visualizations of linear models for labs
 
-## Appendix 4: Tests
+## Appendix 4:  Visualizations of linear models for tests
