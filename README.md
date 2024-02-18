@@ -388,7 +388,7 @@ Recommendations for further research include extracting additional features from
 - Consider the number of single answer and multiple answer questions for tests
 - For labs, consider the time required to deploy the infrastructure and the number of assessment criteria. 
 
-In the long run, it also important to include learner feedback and engagement metrics to better tailor educational content to individual learning paces and preferences.
+In the long run, it is also important to include learner feedback and engagement metrics to better tailor educational content to individual learning paces and preferences.
 
 ## Appendix
 
