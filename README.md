@@ -1,6 +1,6 @@
 ## Title
 <!-- Optional, the preface is not about the subject -->
-An analysis of predicted study time in an inclusive digital environment for advanced training in the field of modern information technology
+An analysis of study materials completion time in an inclusive digital environment for advanced training in the field of modern information technology
 
 By  Aleksandr Gorbachev & David Langeveld  
 
@@ -18,13 +18,9 @@ February 2024
 ## Table of contents
 
 ## Introduction
-In the digital age, being up to speed regarding the latest technology trends is essential for the current workforce. Microsoft, Amazon and Google are all big players in the industry of cloud computing and have many cases where candidates can learn and receive certifications in these areas of the field.
+Since 2017 the Network Systems Administration Laboratory (NSALAB) has been creating conditions for preparing young people to participate in international professional ICT skills competitions according to WorldSkills International standards. Starting 2020 NSALAB team decided to develop own linclusive digital environment for advanced training in the field of modern information technology (NSALAB Learn) to facilitate ICT training for the national team as well as for broader VET audience.
 
-Since 2017 the client has been creating conditions for preparing young people to participate in international professional ICT skills competitions according to WorldSkills standards. In 2018 WorldSkills has announced a set of new skills areas, including cloud computing to be held during the next international competition. 
-
-The client decided to develop this training area and began to study the market for products that could allow participants to undertake practical programs and demonstrate their professional skills in this arena. This project involves a platform that provides an inclusive digital environment for advanced training in the field of modern information technology. The platform has suitable tools that could allow young people to undertake practical programs and demonstrate their professional skills especially in new directions that appear in this ICT field every year.
-
-As the project develops, it would be interesting to view the relations between users and their attributes when making use of the platform. This is where our research begins.
+One of the issues faced in the development of the platform is the 'cold start' estimation of how long it might take to complete the developed learning pathways in order to better plan and schedule training activities. As the project develops, and considering the accumulation of real data, it would be interesting to look at the relationships between learning material characteristics and actual completion times.
 
 ## Operationalization of the research objectives
 <!-- Describe the data that will be used and how the questions will be answered on the basis of this data. The data analysis itself is not yet described here. So do tell ‘Data file [X] comes from [Y] and can answer the posed questions because [Z]’, but do not yet describe the data itself -->
