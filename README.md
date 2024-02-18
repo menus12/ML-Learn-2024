@@ -21,8 +21,6 @@ This research paper explores the estimation of study materials' completion time 
 
 <!-- TOC start (generated with https://github.com/derlin/bitdowntoc) -->
 
-- [Abstract](#abstract)
-- [Table of contents](#table-of-contents)
 - [Introduction](#introduction)
 - [Operationalization of the research objectives](#operationalization-of-the-research-objectives)
 - [JSON pre-processing](#json-pre-processing)
