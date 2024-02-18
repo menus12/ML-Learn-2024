@@ -15,6 +15,8 @@ February 2024
 ## Abstract
 <!-- Contains the purpose of the research carried out, the research questions that are dealt with, the research method and the most important findings -->
 
+This research paper explores the estimation of study materials' completion time within the NSALAB Learn platform, a digital environment for ICT training. The study utilizes data from MongoDB to analyze the relationship between material characteristics (lectures, labs, tests) and actual completion times. Pre-processing and machine learning models, specifically regression, are applied to predict completion times based on features like words, illustrations, and videos. The findings reveal significant correlations, such as the impact of video duration on lecture completion times, although with varying degrees of accuracy across material types, indicating areas for model improvement.
+
 ## Table of contents
 
 ## Introduction
@@ -349,7 +351,14 @@ The predictions for test completion times look legitimate, however slightly over
 ## Conclusions and recommendations
 <!-- including recommendations for further research -->
 
+Current study emphasizes the promising potential of using machine learning models to predict the completion time of educational materials in digital learning environments. Despite the challenges in accurately predicting times across different types of materials, the research underscores the importance of understanding how various factors influence learner engagement and completion rates. 
 
+Recommendations for further research include extracting additional features from training materials and adding them to existing models:
+- For all text materials, develop and apply frameworks based on natural language processing to assess text complexity
+- Consider the number of single answer and multiple answer questions for tests
+- For labs, consider the time required to deploy the infrastructure and the number of assessment criteria. 
+
+In the long run, it also important to include learner feedback and engagement metrics to better tailor educational content to individual learning paces and preferences.
 
 ## Appendix
 
